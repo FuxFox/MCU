@@ -3,7 +3,7 @@
 * You can modify the code to support other MCU.
 
 *list:
-- app_button	  -	This module is used for keyboard scanning and provides callback.Support long-press detection.
+- app_button  	  -	This module is used for keyboard scanning and provides callback.Support long-press detection.
 - app_delay		-	A blocking delay module. Implemented base on STM32F103 with HAL.
 - app_error		-	Implement assert macro and error handler.
 - app_gpio		-	You can use pin number of chip to control the GPIO
