@@ -10,23 +10,23 @@
 
 * Here is a list of drivers base on STM32, you can also replace STM32 related code for other MCU.
 - drv_cv0629	-	KEWEINIDI CV0629 driver.(a cup distribute device)
-- drv_IRM		-	Infrared Receiver Module(IRM) Driver 
-- drv_NTC		-	NTC resistor driver
+- drv_IRM	-	Infrared Receiver Module(IRM) Driver 
+- drv_NTC	-	NTC resistor driver
 - drv_tb6600	-	This is a step motor driver base on TB6600 driver chip
 
 * Here is a list of drivers base on NRF52832, you can also replace NRF related code for other MCU.
 - drv_buzzer	-	Just a passive buzzer driver
-- drv_m26		-	QUECTEL M26 IOT module driver
+- drv_m26	-	QUECTEL M26 IOT module driver
 - drv_st7789v	-	AML280V15002-A TFT-LCD driver, base on ST7789V driver chip
 
 * Here is a list of generic driver.
 - drv_at24cxx	-	AT24Cxx serial EEPROM
 - drv_cs1237	-	CHIPSEA CS1237 24-bit Sigma-Delta ADC
-- drv_iic		-	Software IIC driver
+- drv_iic	-	Software IIC driver
 - drv_mlx90614	-	MLX90614 Infrared temperature sensor driver
 - drv_pct2075gv -	PCT2075GV temperature sensor driver
-- drv_pins		-	Batch pins configure and readability macro define.
+- drv_pins	-	Batch pins configure and readability macro define.
 - drv_rgb_led	-	RGB LED driver
-- drv_spi		-	Software SPI driver
+- drv_spi	-	Software SPI driver
 
 * You may also need to refer the files app_config.h and custom_board.h under the ../../mcu/nrf52/ or ../../mcu/stm32/
