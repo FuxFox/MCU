@@ -19,8 +19,9 @@
 
   /*! \defgroup app_timer_public Public
   \ingroup app_timer
-  \brief      A software timer module implemented base on STM32f103xxx with HAL.
-              You can use RTC or TIM as timebase(1 ms).
+  \brief      A software timer module implemented base on HAL.
+			  You must implement the hal_timer_timebase_XXX() interface and callback app_timer_process_IT() in interrupt
+              of timebase timer to use the app_timer.
               You can configure the soft timer as real-time mode(callback in interrupt) or not(callback in main loop).
               Support single-shot and repeated mode.
 
@@ -44,22 +45,8 @@
   * @{ */
 #include "app_config.h"
 
-  //********************************* Module Config *******************************/
-
-  /*! \defgroup APP_TIMER_TIMEBASE_TYPE
-  * @{ */
-#define APP_TIMER_TIMEBASE_RTC            0
-#define APP_TIMER_TIMEBASE_TIM            1
-  /*! @}*/ //end of group APP_TIMER_TIMEBASE_TYPE
-
-
-#define APP_TIMER_TIMEBASE                     CFG_APP_TIMER_TIMEBASE           /*!< Select the time base that use for app_timer, \ref APP_TIMER_TIMEBASE_TYPE */
-#define APP_TIMER_TIMEBASE_IRQ_PRIORITY        CFG_APP_TIMEBASE_IRQ_PRIORITY    /*!< the interrupt main-priority of timebase tick */
+//********************************* Module Config *******************************/
 #define APP_TIMER_SOFTTIMER_MAX                CFG_APP_TIMER_NUM_MAX            /*!< the max amount of soft timer */
-
-#if (APP_TIMER_TIMEBASE == APP_TIMER_TIMEBASE_TIM)
-#define APP_TIMEBASE_TIM_ID                6    /*!< the hardware timer used for timebase, can be [2-7]. e.g if use TIM4, this value will be 4. Base timers are recommended*/
-#endif
 
 
 
