@@ -65,8 +65,8 @@ static void app_button_scan(void)
         {
             if (p_button_sta->is_press)
             {
-                p_button_sta->long_press_cnt++;
-                if (p_button_sta->long_press_cnt * APP_BUTTON_SCAN_INTERVAL > APP_BUTTON_LONG_PRESS_DETECT_DELAY)
+                p_button_sta->long_press_cnt += APP_BUTTON_SCAN_INTERVAL;
+                if (p_button_sta->long_press_cnt >= APP_BUTTON_LONG_PRESS_DETECT_DELAY)
                 {
                     p_button_sta->long_press_cnt = 0;
                     p_button_cfg->callback(p_button_cfg->button_pin, APP_BUTTON_LONG_PRESS);
@@ -75,6 +75,7 @@ static void app_button_scan(void)
             else
             {
                 p_button_sta->is_press = true;
+                p_button_sta->long_press_cnt = 0;
                 p_button_cfg->callback(p_button_cfg->button_pin, APP_BUTTON_PRESS);
             }
         }
