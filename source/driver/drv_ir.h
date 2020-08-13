@@ -20,6 +20,7 @@
 
 
 //********************************* Module Config *******************************/
+#define DRV_IR_BIT_SEQUENCE_MSB_FIRST 0	// default 0 for standard NEC
 
 /*! IR protocol -> NEC with full repeat code */
 #define DRV_IR_PROTOCOL_NEC_FULL      {9000, 4500, 560, 1690, 560, 560, 0, 0}
@@ -40,7 +41,7 @@ typedef struct
 
 typedef struct
 {
-	void (*pwm_init)(void);		/*!< init pwm channel to 38Khz */
+	void (*pwm_init)(void);		/*!< init pwm channel to 38Khz and 1/3 duty */
 	void (*pwm_switch)(bool);	/*!< switch pwm ON or OFF */
 }drv_pwm_instance_t;
 
