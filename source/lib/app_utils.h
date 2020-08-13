@@ -40,7 +40,14 @@
 ******************************************************************************/
 uint32_t app_utils_get_checksum(uint8_t* dat, uint32_t len);
 
-
+/*!*****************************************************************************
+\brief  	get array member index
+\param[in]	uint8_t member : member value
+\param[in]	uint8_t arr : pointer to array
+\param[in]	uint8_t array_size : max number of member in <arr>
+\return     uint8_t : return index if member found, or -1 if not found
+******************************************************************************/
+uint8_t app_utils_get_array_member_index_uint8(uint8_t member, uint8_t* arr, uint8_t array_size);
 
 
 

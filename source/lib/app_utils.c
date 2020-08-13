@@ -33,7 +33,20 @@ uint32_t app_utils_get_checksum(uint8_t* dat, uint32_t len)
     return sum;
 }
 
+uint8_t app_utils_get_array_member_index_uint8(uint8_t member, uint8_t* arr, uint8_t array_size)
+{
+	uint8_t i;
 
+	for (i = 0; i < array_size; i++)
+	{
+		if (arr[i] == member)
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}
 
 
 #endif // APP_UTILS_C

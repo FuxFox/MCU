@@ -69,7 +69,29 @@
   */
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
+#define DIV_ROUND_UP(n,d) (((n) + (d) - 1) / (d))
 
+/**
+* upper_32_bits - return bits 32-63 of a number
+* @n: the number we're accessing
+*
+* A basic shift-right of a 64- or 32-bit quantity.  Use this to suppress
+* the "right shift count >= width of type" warning when that quantity is
+* 32-bits.
+*/
+#define UPPER_32_BITS(n) ((uint32_t)(((n) >> 16) >> 16))
+#define UPPER_16_BITS(n) ((uint16_t)(((n) >> 8) >> 8))
+#define UPPER_8_BITS(n) ((uint8_t)((n) >> 8))
+
+/**
+* lower_32_bits - return bits 0-31 of a number
+* @n: the number we're accessing
+*/
+#define LOWER_32_BITS(n) ((uint32_t)(n))
+#define LOWER_16_BITS(n) ((uint16_t)(n))
+#define LOWER_8_BITS(n) ((uint8_t)(n))
+
+#define GET_BYTE(w, n)	((uint8_t)((w) >> (n << 3)))
 /**************************** Standard *********************************/
 
 
