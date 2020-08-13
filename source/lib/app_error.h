@@ -1,24 +1,15 @@
 /*******************************************************************************
- *
- * Module: app_error
+ * LICENSE : Apache 2.0
  *           
  * History:
  *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/11/21 15:30          V1.0             build this file
+ *      FuxFox	      2020/08/13 16:12          V1.0             build this file
  *
- *******************************************************************************/
-/*!
- * \file     app_error.h
- * \brief    
- * \author   FuxFox
- * \version  V1.0
- * \date       2019/11/21
  *******************************************************************************/
 #ifndef APP_ERROR_H
 #define APP_ERROR_H
 
-/*! \defgroup app_error_public Public
-\ingroup app_error
+/*! \defgroup app_error
 \brief      Implement assert macro and error handler
 \details 
 * @{ */
@@ -28,7 +19,22 @@
                                 
 #ifdef  USE_FULL_ASSERT
 
+/*!*****************************************************************************
+\brief      initialize
+\param[in]    void
+\return     void
+******************************************************************************/
+void app_error_init(void);
+
+/**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
 void app_error_assert(uint8_t* file, uint32_t line);
+
 void app_error_handler(uint32_t error_code, uint8_t* file, uint32_t line);
 
 /**
@@ -63,7 +69,6 @@ void app_error_handler(uint32_t error_code, uint8_t* file, uint32_t line);
 
 
 
-//********************************* Private Interface ***************************/
 
 
 
