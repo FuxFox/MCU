@@ -9,10 +9,10 @@
 #ifndef APP_UTILS_H
 #define APP_UTILS_H
 
-/*! \defgroup app_utils_public Public
-\ingroup app_utils
-\brief 
-\details 
+/*! \defgroup app_utils
+* \ingroup lib
+* \brief
+* \details
 * @{ */
 
 #include "app_config.h"

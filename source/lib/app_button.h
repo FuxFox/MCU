@@ -6,13 +6,6 @@
  *      FuxFox          2019/11/27 10:35          V1.0             build this file
  *
  *******************************************************************************/
- /*!
-  * @file     app_button.h
-  * @brief
-  * @author   FuxFox
-  * @version  V1.0
-  * @date       2019/11/27
-  *******************************************************************************/
 #ifndef APP_BUTTON_H
 #define APP_BUTTON_H
 
@@ -20,63 +13,63 @@
 
 #include "hal_gpio.h"
 
-/*! @defgroup app_button_public Public
-* @ingroup app_button
+/*! @defgroup app_button
+* @ingroup lib
 * @brief    This module is used for keyboard scanning and provides callback.Support long-press detection.
-            The module will scan(Polling) gpio pin in timer interrupt.
-
-    example for linear keyboard:
-        #include "app_button.h"
-        #define UI_BUTTON_LIST	{		\
-            {PIN_BUTTON_1,	HAL_GPIO_NOPULL, APP_BUTTON_ACTIVE_LOW, ui_button_handler},\
-            {PIN_BUTTON_2,	HAL_GPIO_NOPULL, APP_BUTTON_ACTIVE_LOW, ui_button_handler},\
-            {PIN_BUTTON_3,	HAL_GPIO_NOPULL, APP_BUTTON_ACTIVE_LOW, ui_button_handler},\
-            {PIN_BUTTON_4,	HAL_GPIO_NOPULL, APP_BUTTON_ACTIVE_LOW, my_button_handler},\
-            {PIN_BUTTON_5,	HAL_GPIO_NOPULL, APP_BUTTON_ACTIVE_LOW, your_button_handler},\
-        }//The button list is an array of app_button_cfg_t
-
-        APP_BUTTON_LIST_DEF(m_button_list, UI_BUTTON_LIST);
-
-        void ui_button_init(void)
-        {
-            app_button_init(&m_button_list);
-
-        }
-
-		void ui_button_handler(uint8_t button_pin, app_button_action_t action)
-		{
-			switch (action)
-			{
-			case APP_BUTTON_RELEASE:
-				break;
-			case APP_BUTTON_PRESS:
-                if (button_pin == PIN_BUTTON_2)
-                    do_something();
-				break;
-			case APP_BUTTON_LONG_PRESS:
-				break;
-			default:
-				break;
-			}
-		}
-
-	example for matrix keyboard:
-        #define UI_BUTTON_MATRIX {	\
-		    .input_pins      = { PIN_BUTTON_I_0, PIN_BUTTON_I_1, PIN_BUTTON_I_2, PIN_BUTTON_I_3, PIN_BUTTON_I_4 },\
-		    .output_pins     = { PIN_BUTTON_O_0, PIN_BUTTON_O_1, PIN_BUTTON_O_2, PIN_BUTTON_O_3, PIN_BUTTON_O_4 },\
-		    .input_pin_pull  = HAL_GPIO_PULLUP,\
-		    .active_level    = APP_BUTTON_ACTIVE_LOW,\
-		    .matrix_callback = ui_button_matrix_handler\
-        }
-
-	    APP_BUTTON_MATRIX_DEF(m_matrix, UI_BUTTON_MATRIX);
-
-	    void ui_button_init(void)
-	    {
-		    app_button_matrix_init(&m_matrix);
-
-	    }
-
+*           The module will scan(Polling) gpio pin in timer interrupt.
+*
+*   example for linear keyboard:
+*       #include "app_button.h"
+*       #define UI_BUTTON_LIST	{		\
+*           {PIN_BUTTON_1,	HAL_GPIO_NOPULL, APP_BUTTON_ACTIVE_LOW, ui_button_handler},\
+*           {PIN_BUTTON_2,	HAL_GPIO_NOPULL, APP_BUTTON_ACTIVE_LOW, ui_button_handler},\
+*           {PIN_BUTTON_3,	HAL_GPIO_NOPULL, APP_BUTTON_ACTIVE_LOW, ui_button_handler},\
+*           {PIN_BUTTON_4,	HAL_GPIO_NOPULL, APP_BUTTON_ACTIVE_LOW, my_button_handler},\
+*           {PIN_BUTTON_5,	HAL_GPIO_NOPULL, APP_BUTTON_ACTIVE_LOW, your_button_handler},\
+*       }//The button list is an array of app_button_cfg_t
+*
+*       APP_BUTTON_LIST_DEF(m_button_list, UI_BUTTON_LIST);
+*
+*       void ui_button_init(void)
+*       {
+*           app_button_init(&m_button_list);
+*
+*       }
+*
+*		void ui_button_handler(uint8_t button_pin, app_button_action_t action)
+*		{
+*			switch (action)
+*			{
+*			case APP_BUTTON_RELEASE:
+*				break;
+*			case APP_BUTTON_PRESS:
+*               if (button_pin == PIN_BUTTON_2)
+*                   do_something();
+*				break;
+*			case APP_BUTTON_LONG_PRESS:
+*				break;
+*			default:
+*				break;
+*			}
+*		}
+*
+*	example for matrix keyboard:
+*       #define UI_BUTTON_MATRIX {	\
+*		    .input_pins      = { PIN_BUTTON_I_0, PIN_BUTTON_I_1, PIN_BUTTON_I_2, PIN_BUTTON_I_3, PIN_BUTTON_I_4 },\
+*		    .output_pins     = { PIN_BUTTON_O_0, PIN_BUTTON_O_1, PIN_BUTTON_O_2, PIN_BUTTON_O_3, PIN_BUTTON_O_4 },\
+*		    .input_pin_pull  = HAL_GPIO_PULLUP,\
+*		    .active_level    = APP_BUTTON_ACTIVE_LOW,\
+*		    .matrix_callback = ui_button_matrix_handler\
+*       }
+*
+*	    APP_BUTTON_MATRIX_DEF(m_matrix, UI_BUTTON_MATRIX);
+*
+*	    void ui_button_init(void)
+*	    {
+*		    app_button_matrix_init(&m_matrix);
+*
+*	    }
+*
 * @{ */
 
 //********************************* Module Config *******************************/

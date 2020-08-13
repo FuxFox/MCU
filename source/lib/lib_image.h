@@ -1,26 +1,18 @@
 /*******************************************************************************
- * Module: lib_image
- *
+ * LICENSE : Apache 2.0
+ *           
  * History:
  *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/10/11 13:42          V1.0             build this file
+ *      FuxFox	      2020/08/13 16:26          V1.0             build this file
  *
  *******************************************************************************/
- /*!
-  * \file     lib_image.h
-  * \brief
-  * \author   FuxFox
-  * \version  V1.0
-  * \date       2019/10/11
-  *******************************************************************************/
 #ifndef LIB_IMAGE_H
 #define LIB_IMAGE_H
 
-  /*! \defgroup lib_image_public Public
-  \ingroup lib_image
-  \brief
-  \details
-  * @{ */
+/*! \defgroup lib_image
+\brief
+\details
+* @{ */
 
 #include "app_globle.h"
 

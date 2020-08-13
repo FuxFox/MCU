@@ -10,8 +10,9 @@
 #define APP_ERROR_H
 
 /*! \defgroup app_error
-\brief      Implement assert macro and error handler
-\details 
+* \ingroup lib
+* \brief      Implement assert macro and error handler
+* \details 
 * @{ */
 
 #include "app_config.h"

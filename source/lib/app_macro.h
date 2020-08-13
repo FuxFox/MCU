@@ -1,21 +1,20 @@
 /*******************************************************************************
- *
- * Module: app_interface_remap
- *
+ * LICENSE : Apache 2.0
+ *           
  * History:
  *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/07/12 14:44          V1.0             build this file
+ *      FuxFox	      2020/08/13 16:24          V1.0             build this file
  *
  *******************************************************************************/
- /*!
-  * \file     app_common_head.h
-  * \brief    
-  * \author   FuxFox
-  * \version  V1.0
-  * \date       2019/07/12
-  *******************************************************************************/
-#ifndef APP_INTERFACE_REMAP_H
-#define APP_INTERFACE_REMAP_H
+#ifndef APP_MACRO_H
+#define APP_MACRO_H
+
+/*! \defgroup app_macro
+* \ingroup lib
+* \brief
+* \details 
+* @{ */
+
 
 /**************************** define *******************/
 
@@ -92,9 +91,9 @@
 #define LOWER_8_BITS(n) ((uint8_t)(n))
 
 #define GET_BYTE(w, n)	((uint8_t)((w) >> (n << 3)))
-/**************************** Standard *********************************/
 
 
 
 
-#endif // APP_COMMON_HEAD_H
+/*! @}*/ //end of group app_macro
+#endif // APP_MACRO_H

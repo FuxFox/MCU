@@ -10,8 +10,9 @@
 #define APP_LOG_H
 
 /*! \defgroup app_log
-\brief		simple LOG module
-\details 
+* \ingroup lib
+* \brief		simple LOG module
+* \details 
 * @{ */
 
 #include "app_config.h"

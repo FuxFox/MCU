@@ -1,45 +1,38 @@
 /*******************************************************************************
- *
- * Module: app_timer
- *
+ * LICENSE : Apache 2.0
+ *           
  * History:
  *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/10/21 17:48          V1.0             build this file
+ *      FuxFox	      2020/08/13 16:25          V1.0             build this file
  *
  *******************************************************************************/
- /*!
-  * \file     app_timer.h
-  * \brief
-  * \author   FuxFox
-  * \version  V1.0
-  * \date       2019/10/21
-  *******************************************************************************/
 #ifndef APP_TIMER_H
 #define APP_TIMER_H
 
-  /*! \defgroup app_timer
-  \brief      A software timer module implemented base on HAL.
-              You can configure the soft timer as real-time mode(callback in interrupt) or not(callback in main loop).
-              Support single-shot and repeated mode.
-
-      example:
-          app_timer_id_t blink_timer;
-
-          void ui_init(void)
-          {
-              app_timer_init();//init before use other function
-
-              blink_timer = app_timer_create(APP_TIMER_MODE_REPEATED, ui_led_blink, false);
-              app_timer_start(blink_timer, 1000, NULL);//timer period in 1000ms
-          }
-
-          void ui_led_blink(void* param)
-          {
-              hal_gpio_pin_toggle(PIN_LED);
-          }
-
-  \details
-  * @{ */
+/*! \defgroup app_timer
+* \ingroup lib
+* \brief      A software timer module implemented base on HAL.
+*             You can configure the soft timer as real-time mode(callback in interrupt) or not(callback in main loop).
+*             Support single-shot and repeated mode.
+* 
+*     example:
+*         app_timer_id_t blink_timer;
+* 
+*         void ui_init(void)
+*         {
+*             app_timer_init();//init before use other function
+* 
+*             blink_timer = app_timer_create(APP_TIMER_MODE_REPEATED, ui_led_blink, false);
+*             app_timer_start(blink_timer, 1000, NULL);//timer period in 1000ms
+*         }
+* 
+*         void ui_led_blink(void* param)
+*         {
+*             hal_gpio_pin_toggle(PIN_LED);
+*         }
+* 
+\details
+* @{ */
 #include "app_config.h"
 
   //********************************* Module Config *******************************/

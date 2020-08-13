@@ -9,10 +9,10 @@
 #ifndef APP_JSON_H
 #define APP_JSON_H
 
-/*! \defgroup app_json_public Public
-\ingroup app_json
-\brief 
-\details 
+/*! \defgroup app_json
+* \ingroup lib
+* \brief
+* \details 
 * @{ */
 
 #include "app_config.h"
