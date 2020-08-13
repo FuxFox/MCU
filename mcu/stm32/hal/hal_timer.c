@@ -1,44 +1,27 @@
 /*******************************************************************************
- *
- * Module: app_timer
- *
+ * LICENSE : Apache 2.0
+ *           
  * History:
  *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/10/21 17:49          V1.0             build this file
+ *      FuxFox	      2020/06/23 10:41          V1.0             build this file
  *
  *******************************************************************************/
- /*!
-  * \file     app_timer.c
-  * \brief
-  * \author   FuxFox
-  * \version  V1.0
-  * \date       2019/10/21
-  *******************************************************************************/
-#ifndef APP_TIMER_C
-#define APP_TIMER_C
+#ifndef HAL_TIMER_C
+#define HAL_TIMER_C
 
-#include "app_timer.h"
+#include "hal_timer.h"
 
-#if defined(APP_TIMER_ENABLE)&&(APP_TIMER_ENABLE)
+#if defined(HAL_TIMER_ENABLE)&&(HAL_TIMER_ENABLE)
 
-#if (APP_TIMER_TIMEBASE == APP_TIMER_TIMEBASE_RTC)
+#if (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_RTC)
 RTC_HandleTypeDef m_timebase_rtc;
-#elif (APP_TIMER_TIMEBASE == APP_TIMER_TIMEBASE_TIM)
+#elif (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_TIM)
 TIM_HandleTypeDef m_timebase_timer;
 #endif
 
-static app_timer_t* p_timer_head;
-static app_timer_t m_app_timers[APP_TIMER_SOFTTIMER_MAX];
-static bool m_is_module_initialized = false;
-
-
-uint32_t app_timer_init(void)
-{
-    memset(m_app_timers, 0, sizeof(m_app_timers));
-    p_timer_head = NULL;
-    m_is_module_initialized = true;
-
-#if (APP_TIMER_TIMEBASE == APP_TIMER_TIMEBASE_RTC)
+uint32_t hal_timer_timebase_init(uint16_t ms)
+{	
+#if (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_RTC)
     __IO uint32_t counter = 0U;
 
     /* Enable RTC Clock */
@@ -99,11 +82,11 @@ uint32_t app_timer_init(void)
         }
     }
 
-    HAL_NVIC_SetPriority(RTC_Alarm_IRQn, APP_TIMER_TIMEBASE_IRQ_PRIORITY, 0U);
+    HAL_NVIC_SetPriority(RTC_Alarm_IRQn, HAL_TIMER_TIMEBASE_IRQ_PRIORITY, 0U);
     HAL_NVIC_EnableIRQ(RTC_Alarm_IRQn);
 
     return HAL_OK;
-#elif (APP_TIMER_TIMEBASE == APP_TIMER_TIMEBASE_TIM)
+#elif (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_TIM)
 
     RCC_ClkInitTypeDef    clkconfig;
     uint32_t              uwTimclock, uwAPB1Prescaler = 0U;
@@ -129,17 +112,17 @@ uint32_t app_timer_init(void)
     /* Compute the prescaler value to have TIM2 counter clock equal to 1MHz */
     uwPrescalerValue = (uint32_t)((uwTimclock / 1000000U) - 1U);
 
-    m_timebase_timer.Instance = CONCAT_2(TIM, APP_TIMEBASE_TIM_ID);
+    m_timebase_timer.Instance = CONCAT_2(TIM, HAL_TIMEBASE_TIM_ID);
     m_timebase_timer.Init.CounterMode = TIM_COUNTERMODE_UP;
     m_timebase_timer.Init.Prescaler = uwPrescalerValue;
     m_timebase_timer.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     m_timebase_timer.Init.Period = 999;
     m_timebase_timer.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
 
-    CONCAT_3(__HAL_RCC_TIM, APP_TIMEBASE_TIM_ID, _CLK_ENABLE(););
+    CONCAT_3(__HAL_RCC_TIM, HAL_TIMEBASE_TIM_ID, _CLK_ENABLE(););
 
-    HAL_NVIC_SetPriority(CONCAT_3(TIM, APP_TIMEBASE_TIM_ID, _IRQn), APP_TIMER_TIMEBASE_IRQ_PRIORITY, 0);
-    HAL_NVIC_EnableIRQ(CONCAT_3(TIM, APP_TIMEBASE_TIM_ID, _IRQn));
+    HAL_NVIC_SetPriority(CONCAT_3(TIM, HAL_TIMEBASE_TIM_ID, _IRQn), HAL_TIMER_TIMEBASE_IRQ_PRIORITY, 0);
+    HAL_NVIC_EnableIRQ(CONCAT_3(TIM, HAL_TIMEBASE_TIM_ID, _IRQn));
 
     if (HAL_TIM_Base_Init(&m_timebase_timer) == HAL_OK)
     {
@@ -148,39 +131,24 @@ uint32_t app_timer_init(void)
 
     return HAL_ERROR;
 #endif
+
 }
 
-void app_timer_start(app_timer_id_t timer_id, uint32_t delay_ms)
+void hal_timer_timebase_pause(void)
 {
-    assert_param(timer_id && delay_ms);
-
-    timer_id->counter = delay_ms;
-    timer_id->delay = delay_ms;
-    timer_id->is_active = true;
-    timer_id->is_pending = false;
-}
-
-void app_timer_stop(app_timer_id_t timer_id)
-{
-    assert_param(timer_id);
-
-    timer_id->is_active = false;
-}
-
-void app_timer_pause(void)
-{
-#if (APP_TIMER_TIMEBASE == APP_TIMER_TIMEBASE_RTC)
+#if (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_RTC)
     /* Disable RTC ALARM update Interrupt */
     __HAL_RTC_ALARM_DISABLE_IT(&m_timebase_rtc, RTC_IT_ALRA);
-#elif (APP_TIMER_TIMEBASE == APP_TIMER_TIMEBASE_TIM)
+#elif (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_TIM)
     /* Disable TIM4 update Interrupt */
     HAL_TIM_Base_Stop_IT(&m_timebase_timer);
 #endif    
+
 }
 
-void app_timer_resume(void)
+void hal_timer_timebase_resume(void)
 {
-#if (APP_TIMER_TIMEBASE == APP_TIMER_TIMEBASE_RTC)
+#if (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_RTC)
     __IO uint32_t counter = 0U;
 
     /* Disable the write protection for RTC registers */
@@ -208,112 +176,13 @@ void app_timer_resume(void)
             break;
         }
     }
-#elif (APP_TIMER_TIMEBASE == APP_TIMER_TIMEBASE_TIM)
+#elif (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_TIM)
     HAL_TIM_Base_Start_IT(&m_timebase_timer);
 #endif
+
 }
 
-
-app_timer_id_t app_timer_create(app_timer_mode_t mode, app_timer_handle callback, bool is_realtime)
-{
-    if (m_is_module_initialized)
-    {
-        assert_param(callback);
-
-        for (uint8_t i = 0; i < APP_TIMER_SOFTTIMER_MAX; i++)
-        {
-            if (m_app_timers[i].callback == NULL)
-            {
-                m_app_timers[i].is_realtime = is_realtime;
-                m_app_timers[i].is_repeat = mode;
-                m_app_timers[i].callback = callback;
-                m_app_timers[i].next = p_timer_head;
-                if (p_timer_head)
-                {
-                    m_app_timers[i].next->last = &m_app_timers[i];
-                }
-                p_timer_head = &m_app_timers[i];
-                return &m_app_timers[i];
-            }
-        }
-    }
-    return NULL;
-}
-
-void app_timer_delete(app_timer_id_t timer_id)
-{
-    assert_param(timer_id);
-
-    if (timer_id && timer_id->callback)
-    {
-        if (timer_id == p_timer_head)
-        {
-
-            p_timer_head = timer_id->next;
-            if (p_timer_head)
-            {
-                p_timer_head->last = NULL;
-            }
-        }
-        else
-        {
-            timer_id->last->next = timer_id->next;
-            if (timer_id->next)
-            {
-                timer_id->next->last = timer_id->last;
-            }
-        }
-
-        memset(timer_id, 0, sizeof(app_timer_t));
-    }
-}
-
-
-void app_timer_process_IT(void)
-{
-    app_timer_t* p_timer;
-
-    for (p_timer = p_timer_head; p_timer; p_timer = p_timer->next)
-    {
-        if (p_timer->is_active)
-        {
-            p_timer->counter--;
-            if (p_timer->counter == 0)
-            {
-                if (p_timer->is_realtime)
-                {
-                    p_timer->callback();
-                }
-                else
-                {
-                    p_timer->is_pending = true;
-                }
-
-                if (p_timer->is_repeat)
-                    p_timer->counter = p_timer->delay;
-                else
-                    p_timer->is_active = false;
-            }
-        }
-    }
-}
-
-void app_timer_process_poll(void)
-{
-    app_timer_t* p_timer;
-
-    for (p_timer = p_timer_head; p_timer; p_timer = p_timer->next)
-    {
-        if (p_timer->is_pending)
-        {
-            p_timer->is_pending = false;
-            p_timer->callback();
-        }
-    }
-}
-
-
-#if (APP_TIMER_TIMEBASE == APP_TIMER_TIMEBASE_RTC)
+#if (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_RTC)
 /**
   * @brief  ALARM A Event Callback in non blocking mode
   * @note   This function is called  when RTC_ALARM interrupt took place, inside
@@ -361,7 +230,7 @@ void RTC_Alarm_IRQHandler(void)
     HAL_RTC_AlarmIRQHandler(&m_timebase_rtc);
 }
 
-#elif (APP_TIMER_TIMEBASE == APP_TIMER_TIMEBASE_TIM)
+#elif (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_TIM)
 
 /**
   * @brief  This function handles TIM interrupt request.
@@ -377,4 +246,4 @@ void TIM6_IRQHandler(void)
 
 #endif
 
-#endif // APP_TIMER_C
+#endif // HAL_TIMER_C

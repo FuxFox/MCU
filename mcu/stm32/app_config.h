@@ -162,26 +162,10 @@ typedef enum
 // <e> APP_TIMER_ENABLE - the software timer
 //==========================================================
 #define APP_TIMER_ENABLE        1
-
-// <o> APP_TIMER_TIMEBASE - the time base use for app_timer
-//==========================================================
-//<0=> RTC
-//<1=> TIM
-#define CFG_APP_TIMER_TIMEBASE 1
-
-//<o> APP_TIMER_TIMEBASE_IRQ_PRIORITY - the irq priority of hardware timer used by app_timer
-//<0-15> 
-#define CFG_APP_TIMEBASE_IRQ_PRIORITY    6    
-
+ 
 //<o> APP_TIMER_NUM_MAX - the max quantity of soft timer 
 #define CFG_APP_TIMER_NUM_MAX 10    
 
-//<o> APP_TIMER_TIM_ID - the hardware timer used by app_timer
-//<i> The hardware timer used by app_timer, can be [2-7]. e.g if use TIM6, this value will be 6
-//<i> Recommend use basic timer TIM6 or TIM7
-//<6=> TIM6
-//<7=> TIM7
-#define CFG_APP_TIMER_TIM_ID    6    
 
 
 // </e> 

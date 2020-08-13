@@ -14,21 +14,16 @@
   * \version  V1.0
   * \date       2019/10/12
   *******************************************************************************/
-#ifndef APP_DELAY_C
-#define APP_DELAY_C
+#ifndef HAL_DELAY_C
+#define HAL_DELAY_C
 
-#include "app_delay.h"
+#include "hal_delay.h"
 #include "stm32f1xx_hal_conf.h"
-#if defined(APP_DELAY_ENABLE)&&(APP_DELAY_ENABLE)
-static uint8_t  fac_us = 0;                            //systick per us               
+#if defined(HAL_DELAY_ENABLE)&&(HAL_DELAY_ENABLE)
 
-/*!*****************************************************************************
-\brief      initialize the soft delay function
-            call this function after system clock initialization.
+static uint8_t  fac_us = 0;  //systick per us               
 
-\return     void
-******************************************************************************/
-void app_delay_init(void)
+void hal_delay_init(void)
 {
 #if defined(HAL_ENABLED)&&(HAL_ENABLED)
     fac_us = SystemCoreClock / (1000000U / HAL_GetTickFreq());
@@ -41,37 +36,16 @@ void app_delay_init(void)
 #endif
 }
 
-#if !defined(HAL_ENABLED)||(HAL_ENABLED == 0)
-
-/*!*****************************************************************************
-\brief      blocked delay in ms
-
-\param[in]    uint16_t nms  The number of ms to delay
-
-\note        SysTick->LOAD is 24bit register, therefore, the max delay of ms are:
-                nms <= 0xffffff / (SYSCLK / 8 / 1000),
-                SYSCLK unit: Hz, nms unit: ms,
-                if SYSCLK is 72000000 Hz, nms <= 1864
-
-\return     void
-******************************************************************************/
-void app_delay_ms(uint16_t nms)
+void hal_delay_ms(uint32_t nms)
 {
     while (nms--)
     {
-        app_delay_us(1000);
+        hal_delay_us(1000);
     };
 }
 
-#endif
 
-/*!*****************************************************************************
-\brief      blocked delay in us
-
-\param[in]    uint32_t nus
-\return     void
-******************************************************************************/
-void app_delay_us(uint32_t nus)
+void hal_delay_us(uint32_t nus)
 {
     uint32_t ticks;
     uint32_t told, tnow, tcnt;
@@ -97,13 +71,12 @@ void app_delay_us(uint32_t nus)
 }
 
 
-uint16_t app_delay_systick_per_us(void)
+uint16_t hal_delay_systick_per_us(void)
 {
     return fac_us;
 }
 
-
-#endif // DELAY_C
+#endif 
 
 
 #endif // DELAY_C

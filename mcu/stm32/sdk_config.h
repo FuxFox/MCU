@@ -773,6 +773,30 @@
 
 // </e> 
 //========================================================== 
+// <e> HAL_TIMER - hal timebase
+//==========================================================
+#define HAL_TIMER_ENABLE 1
+
+// <o> HAL_TIMER_TIMEBASE - the time base use for app_timer
+//==========================================================
+//<0=> RTC
+//<1=> TIM
+#define CFG_HAL_TIMER_TIMEBASE 1
+
+//<o> HAL_TIMER_TIMEBASE_IRQ_PRIORITY - the irq priority of hardware timer used by app_timer
+//<0-15> 
+#define CFG_HAL_TIMEBASE_IRQ_PRIORITY    6    
+
+//<o> HAL_TIMER_TIM_ID - the hardware timer used by app_timer
+//<i> The hardware timer used by app_timer, can be [2-7]. e.g if use TIM6, this value will be 6
+//<i> Recommend use basic timer TIM6 or TIM7
+//<6=> TIM6
+//<7=> TIM7
+#define CFG_HAL_TIMER_TIM_ID    6   
+
+
+// </e> 
+//========================================================== 
 // <e> HAL_UART
 //==========================================================
 #define HAL_UART_ENABLE 1
