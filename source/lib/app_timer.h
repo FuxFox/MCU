@@ -17,11 +17,8 @@
 #ifndef APP_TIMER_H
 #define APP_TIMER_H
 
-  /*! \defgroup app_timer_public Public
-  \ingroup app_timer
+  /*! \defgroup app_timer
   \brief      A software timer module implemented base on HAL.
-			  You must implement the hal_timer_timebase_XXX() interface and callback app_timer_process_IT() in interrupt
-              of timebase timer to use the app_timer.
               You can configure the soft timer as real-time mode(callback in interrupt) or not(callback in main loop).
               Support single-shot and repeated mode.
 
@@ -33,19 +30,22 @@
               app_timer_init();//init before use other function
 
               blink_timer = app_timer_create(APP_TIMER_MODE_REPEATED, ui_led_blink, false);
-              app_timer_start(blink_timer, 1000);//timer period in 1000ms
+              app_timer_start(blink_timer, 1000, NULL);//timer period in 1000ms
           }
 
-          void ui_led_blink(void)
+          void ui_led_blink(void* param)
           {
-              app_gpio_pin_toggle(PIN_LED);
+              hal_gpio_pin_toggle(PIN_LED);
           }
 
   \details
   * @{ */
 #include "app_config.h"
 
-//********************************* Module Config *******************************/
+  //********************************* Module Config *******************************/
+
+#define APP_TIMER_TIMEBASE                     CFG_APP_TIMER_TIMEBASE           /*!< Select the time base that use for app_timer, \ref APP_TIMER_TIMEBASE_TYPE */
+#define APP_TIMER_TIMEBASE_IRQ_PRIORITY        CFG_APP_TIMEBASE_IRQ_PRIORITY    /*!< the interrupt main-priority of timebase tick */
 #define APP_TIMER_SOFTTIMER_MAX                CFG_APP_TIMER_NUM_MAX            /*!< the max amount of soft timer */
 
 
@@ -59,17 +59,18 @@ typedef enum
     APP_TIMER_MODE_REPEATED                     /**< The timer will restart each time it expires. */
 } app_timer_mode_t;
 
-typedef void (*app_timer_handle)(void);
+typedef void (*app_timer_handle)(void*);
 
 typedef struct app_timer_struct
 {
-    uint32_t    counter;
-    uint32_t     delay;
-    bool    is_realtime;
-    bool     is_repeat;
-    bool     is_pending;
-    bool     is_active;
+    uint32_t counter;
+    uint32_t delay;
+	bool is_pending;
+	bool is_active;
+    bool is_realtime;
+    bool is_repeat;
     app_timer_handle    callback;
+    void*    callback_param;
     struct app_timer_struct* last;
     struct app_timer_struct* next;
 }app_timer_t;
@@ -95,9 +96,10 @@ uint32_t app_timer_init(void);
 \details        the timer specific by timer_id must be created
 \param[in]    app_timer_id_t timer_id        the specific timer id, return by \ref app_timer_create()
 \param[in]    uint32_t delay_ms            the timer expire time, in ms
+\param[in]    void* param            the pointer to the param need by timer callback functon
 \return     void
 ******************************************************************************/
-void app_timer_start(app_timer_id_t timer_id, uint32_t delay_ms);
+void app_timer_start(app_timer_id_t timer_id, uint32_t delay_ms, void* param);
 
 /*!*****************************************************************************
 \brief      stop a timer specified by timer_id

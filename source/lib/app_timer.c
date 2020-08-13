@@ -18,27 +18,26 @@
 #define APP_TIMER_C
 
 #include "app_timer.h"
+#include "app_error.h"
+#include "hal_timer.h"
 
 #if defined(APP_TIMER_ENABLE)&&(APP_TIMER_ENABLE)
 
-static app_timer_t* p_timer_head;
-static app_timer_t m_app_timers[APP_TIMER_SOFTTIMER_MAX];
+static app_timer_t* p_timer_head = NULL;
+static app_timer_t m_app_timers[APP_TIMER_SOFTTIMER_MAX] = { 0 };
 static bool m_is_module_initialized = false;
 
-extern void hal_timer_timebase_init(uint16_t ms);
-extern void hal_timer_timebase_pause(void);
-extern void hal_timer_timebase_resume(void);
 
 uint32_t app_timer_init(void)
 {
-    memset(m_app_timers, 0, sizeof(m_app_timers));
-    p_timer_head = NULL;
     m_is_module_initialized = true;
 
-    hal_timer_timebase_init(1);//initialize timebase as 1ms
+    hal_timer_timebase_init(1);
+
+    return 0;
 }
 
-void app_timer_start(app_timer_id_t timer_id, uint32_t delay_ms)
+void app_timer_start(app_timer_id_t timer_id, uint32_t delay_ms, void* param)
 {
     assert_param(timer_id && delay_ms);
 
@@ -46,6 +45,7 @@ void app_timer_start(app_timer_id_t timer_id, uint32_t delay_ms)
     timer_id->delay = delay_ms;
     timer_id->is_active = true;
     timer_id->is_pending = false;
+    timer_id->callback_param = param;
 }
 
 void app_timer_stop(app_timer_id_t timer_id)
@@ -53,6 +53,7 @@ void app_timer_stop(app_timer_id_t timer_id)
     assert_param(timer_id);
 
     timer_id->is_active = false;
+    timer_id->is_pending = false;
 }
 
 void app_timer_pause(void)
@@ -134,7 +135,7 @@ void app_timer_process_IT(void)
             {
                 if (p_timer->is_realtime)
                 {
-                    p_timer->callback();
+                    p_timer->callback(p_timer->callback_param);
                 }
                 else
                 {
@@ -159,13 +160,10 @@ void app_timer_process_poll(void)
         if (p_timer->is_pending)
         {
             p_timer->is_pending = false;
-            p_timer->callback();
+            p_timer->callback(p_timer->callback_param);
         }
     }
 }
 
-
-
-#endif
-
+#endif // APP_TIMER_ENABLE
 #endif // APP_TIMER_C
