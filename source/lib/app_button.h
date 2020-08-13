@@ -43,6 +43,23 @@
 
         }
 
+		void ui_button_handler(uint8_t button_pin, app_button_action_t action)
+		{
+			switch (action)
+			{
+			case APP_BUTTON_RELEASE:
+				break;
+			case APP_BUTTON_PRESS:
+                if (button_pin == PIN_BUTTON_2)
+                    do_something();
+				break;
+			case APP_BUTTON_LONG_PRESS:
+				break;
+			default:
+				break;
+			}
+		}
+
 	example for matrix keyboard:
         #define UI_BUTTON_MATRIX {	\
 		    .input_pins      = { PIN_BUTTON_I_0, PIN_BUTTON_I_1, PIN_BUTTON_I_2, PIN_BUTTON_I_3, PIN_BUTTON_I_4 },\
