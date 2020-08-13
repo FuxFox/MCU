@@ -20,30 +20,22 @@
 #include "hal_delay.h"
 #if defined(HAL_DELAY_ENABLE)&&(HAL_DELAY_ENABLE)
 
-/*!*****************************************************************************
-\brief      initialize the soft delay function
-            call this function after system clock initialization.
-
-\return     void
-******************************************************************************/
 void hal_delay_init(void)
 {
-    //TODO
+
 }
 
-/*!*****************************************************************************
-\brief      blocked delay in us
-
-\param[in]    uint32_t nus
-\return     void
-******************************************************************************/
 void hal_delay_us(uint32_t nus)
 {
-    //TODO
+
 }
 
+void hal_delay_ms(uint32_t nms)
+{
 
-#endif // DELAY_C
+}
+
+#endif 
 
 
 #endif // DELAY_C
