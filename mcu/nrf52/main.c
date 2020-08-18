@@ -8,7 +8,20 @@
 #ifndef MAIN_C
 #define MAIN_C
 
-#include "main.h"
+#include "app_globle.h"
+#include "driver.h"
+#include "module.h"
+#include "ui.h"
+#include "ble_module.h"
+#include "test/test.h"
+
+void assert_nrf_callback(uint16_t line_num, const uint8_t* p_file_name);
+
+static void main_nrf_preinit(void);
+static void timers_init(void);
+static void log_init(void);
+static void power_management_init(void);
+static void idle_state_handle(void);
 
 /*!*****************************************************************************
 * @brief     Function for application main entry.
