@@ -1,11 +1,10 @@
-/*******************************************************************************
- * LICENSE : Apache 2.0
- *           
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox	      2020/06/23 10:41          V1.0             build this file
- *
- *******************************************************************************/
+/*!*****************************************************************************
+* @file     hal_timer.c
+* @brief
+* @author	 FuxFox
+* @version  V1.0
+* @date     2020/08/18
+*******************************************************************************/
 #ifndef HAL_TIMER_C
 #define HAL_TIMER_C
 
@@ -184,13 +183,13 @@ void hal_timer_timebase_resume(void)
 
 #if (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_RTC)
 /**
-  * @brief  ALARM A Event Callback in non blocking mode
-  * @note   This function is called  when RTC_ALARM interrupt took place, inside
-  * RTC_ALARM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
-  * a global variable "uwTick" used as application time base.
-  * @param  hrtc RTC handle
-  * @retval None
-  */
+* @brief  ALARM A Event Callback in non blocking mode
+* @note   This function is called  when RTC_ALARM interrupt took place, inside
+* RTC_ALARM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+* a global variable "uwTick" used as application time base.
+* @param  hrtc RTC handle
+* @retval None
+*/
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef* hrtc)
 {
     __IO uint32_t counter = 0U;
@@ -222,9 +221,9 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef* hrtc)
 }
 
 /**
-  * @brief  This function handles RTC ALARM interrupt request.
-  * @retval None
-  */
+* @brief  This function handles RTC ALARM interrupt request.
+* @retval None
+*/
 void RTC_Alarm_IRQHandler(void)
 {
     HAL_RTC_AlarmIRQHandler(&m_timebase_rtc);
@@ -233,9 +232,9 @@ void RTC_Alarm_IRQHandler(void)
 #elif (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_TIM)
 
 /**
-  * @brief  This function handles TIM interrupt request.
-  * @retval None
-  */
+* @brief  This function handles TIM interrupt request.
+* @retval None
+*/
 void TIM6_IRQHandler(void)
 {
     __HAL_TIM_CLEAR_IT(&m_timebase_timer, TIM_IT_UPDATE);
