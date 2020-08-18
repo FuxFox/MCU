@@ -1,71 +1,65 @@
 /*******************************************************************************
- * LICENSE : Apache 2.0
- *           
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox	      2020/08/13 16:24          V1.0             build this file
- *
- *******************************************************************************/
+* LICENSE : Apache 2.0
+*           
+* History:
+*    <author>         <time>             <version>             <desc>
+*      FuxFox	      2020/08/13 16:24          V1.0             build this file
+*
+*******************************************************************************/
 #ifndef APP_MACRO_H
 #define APP_MACRO_H
 
-/*! \defgroup app_macro
-* \ingroup lib
-* \brief
-* \details 
+/**
+* @defgroup app_macro
+* @ingroup lib
+* @brief
+* @details 
 * @{ */
 
-
-/**************************** define *******************/
-
-
-
-/**************************** common macro *******************/
-
-/**@brief Concatenates two parameters.
- *
- * It realizes two level expansion to make it sure that all the parameters
- * are actually expanded before gluing them together.
- *
- * @param p1 First parameter to concatenating
- * @param p2 Second parameter to concatenating
- *
- * @return Two parameters glued together.
- *         They have to create correct C mnemonic in other case
- *         preprocessor error would be generated.
- *
- * @sa CONCAT_3
- */
+/**
+* @brief Concatenates two parameters.
+*
+* It realizes two level expansion to make it sure that all the parameters
+* are actually expanded before gluing them together.
+*
+* @param p1 First parameter to concatenating
+* @param p2 Second parameter to concatenating
+*
+* @return Two parameters glued together.
+*         They have to create correct C mnemonic in other case
+*         preprocessor error would be generated.
+*
+* @sa CONCAT_3
+*/
 #define CONCAT_2(p1, p2)      CONCAT_2_(p1, p2)
- /** Auxiliary macro used by @ref CONCAT_2 */
+/** Auxiliary macro used by @ref CONCAT_2 */
 #define CONCAT_2_(p1, p2)     p1##p2
 
-/**@brief Concatenates three parameters.
- *
- * It realizes two level expansion to make it sure that all the parameters
- * are actually expanded before gluing them together.
- *
- * @param p1 First parameter to concatenating
- * @param p2 Second parameter to concatenating
- * @param p3 Third parameter to concatenating
- *
- * @return Three parameters glued together.
- *         They have to create correct C mnemonic in other case
- *         preprocessor error would be generated.
- *
- * @sa CONCAT_2
- */
+/**
+* @brief Concatenates three parameters.
+*
+* It realizes two level expansion to make it sure that all the parameters
+* are actually expanded before gluing them together.
+*
+* @param p1 First parameter to concatenating
+* @param p2 Second parameter to concatenating
+* @param p3 Third parameter to concatenating
+*
+* @return Three parameters glued together.
+*         They have to create correct C mnemonic in other case
+*         preprocessor error would be generated.
+*
+* @sa CONCAT_2
+*/
 #define CONCAT_3(p1, p2, p3)  CONCAT_3_(p1, p2, p3)
- /** Auxiliary macro used by @ref CONCAT_3 */
+/** Auxiliary macro used by @ref CONCAT_3 */
 #define CONCAT_3_(p1, p2, p3) p1##p2##p3
 
 #define STRINGIFY_(val) #val
-/** Converts a macro argument into a character constant.
- */
+/** Converts a macro argument into a character constant. */
 #define STRINGIFY(val)  STRINGIFY_(val)
 
- /** Counts number of elements inside the array
-  */
+/** Counts number of elements inside the array */
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
 #define DIV_ROUND_UP(n,d) (((n) + (d) - 1) / (d))
@@ -95,5 +89,5 @@
 
 
 
-/*! @}*/ //end of group app_macro
+/** @}*/ //end of group app_macro
 #endif // APP_MACRO_H

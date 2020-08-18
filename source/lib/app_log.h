@@ -1,23 +1,24 @@
 /*******************************************************************************
- * LICENSE : Apache 2.0
- *           
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox	      2020/08/13 16:01          V1.0             build this file
- *
- *******************************************************************************/
+* LICENSE : Apache 2.0
+*           
+* History:
+*    <author>         <time>             <version>             <desc>
+*      FuxFox	      2020/08/13 16:01          V1.0             build this file
+*
+*******************************************************************************/
 #ifndef APP_LOG_H
 #define APP_LOG_H
 
-/*! \defgroup app_log
-* \ingroup lib
-* \brief		simple LOG module
-* \details 
+/**
+* @defgroup app_log
+* @ingroup lib
+* @brief		simple LOG module
+* @details 
 * @{ */
 
 #include "app_config.h"
 
-//********************************* Module Config *******************************/
+/*================================= Data Type ================================*/
 
 #define APP_LOG_ENABLE		CFG_LOG_ENABLE
 #define APP_LOG_LEVEL		CFG_LOG_LEVEL
@@ -28,7 +29,7 @@
 #ifndef APP_LOG_MODULE_SYMBLE
 #define APP_LOG_MODULE_SYMBLE "USER"
 #endif
-//********************************* Data Type ***********************************/
+/*================================= Data Type ================================*/
 
 typedef enum
 {
@@ -39,13 +40,13 @@ typedef enum
 	APP_LOG_LEVEL_DEBUG
 }app_log_level_t;
 
-//********************************* Public Interface ****************************/
+/*================================= Public Interface =========================*/
 
 /*!*****************************************************************************
-\brief  	initialize UART or other channel to print log
-\param[in]	void
-\return     void
-******************************************************************************/
+* @brief  	initialize UART or other channel to print log
+* @param[in]	void
+* @return     void
+*******************************************************************************/
 #if (APP_LOG_ENABLE && APP_LOG_LEVEL)
 void app_log_init(void);
 #else
@@ -53,12 +54,12 @@ void app_log_init(void);
 #endif
 
 /*!*****************************************************************************
-\brief  	Print an array to Hex
-\param[in]	uint8_t * str : prompt information
-\param[in]	uint8_t * arry
-\param[in]	uint8_t size
-\return     void
-******************************************************************************/
+* @brief  	Print an array to Hex
+* @param[in]	uint8_t * str : prompt information
+* @param[in]	uint8_t * arry
+* @param[in]	uint8_t size
+* @return     void
+*******************************************************************************/
 void app_log_print_array_to_hex(uint8_t* str, uint8_t* arry, uint8_t size);
 
 #if APP_LOG_MODULE_SYMBLE_ENABLE
@@ -109,5 +110,5 @@ void app_log_print_array_to_hex(uint8_t* str, uint8_t* arry, uint8_t size);
 
 
 
-/*! @}*/ //end of group app_log
+/** @}*/ //end of group app_log
 #endif // APP_LOG_H

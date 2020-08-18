@@ -1,18 +1,10 @@
-/*******************************************************************************
- * LICENSE : Apache 2.0
- *           
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/11/27 10:36          V1.0             build this file
- *
- *******************************************************************************/
-/*!
- * @file     app_button.c
- * @brief    
- * @author   FuxFox
- * @version  V1.0
- * @date       2019/11/27
- *******************************************************************************/
+/*!*****************************************************************************
+* @file     app_button.c
+* @brief    
+* @author   FuxFox
+* @version  V1.0
+* @date     2019/11/27
+*******************************************************************************/
 #ifndef APP_BUTTON_C
 #define APP_BUTTON_C
 
@@ -53,7 +45,7 @@ void app_button_linear_init(app_button_linear_t *linear)
 * @brief      button scan in timer interrupt
 * @param[in]    void
 * @return     void
-******************************************************************************/
+*******************************************************************************/
 static void app_button_linear_scan(void* param)
 {
     uint8_t i;
@@ -155,10 +147,10 @@ void app_button_matrix_init(app_button_matrix_t* matrix)
 }
 
 /*!*****************************************************************************
-\brief  	Matrix keyboard scan
-\param[in]	void* para : pointer to app_button_matrix_t
-\return     void
-******************************************************************************/
+* @brief  	Matrix keyboard scan
+* @param[in]	void* para : pointer to app_button_matrix_t
+* @return     void
+*******************************************************************************/
 static void app_button_matrix_scan(void* para)
 {
 	app_button_matrix_t* matrix = (app_button_matrix_t*)para;
