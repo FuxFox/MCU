@@ -182,14 +182,16 @@ void hal_timer_timebase_resume(void)
 }
 
 #if (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_RTC)
-/**
-* @brief  ALARM A Event Callback in non blocking mode
+
+/*!*****************************************************************************
+* @brief     ALARM A Event Callback in non blocking mode
+* @detail
+* @param[in] RTC_HandleTypeDef * hrtc : hrtc RTC handle
 * @note   This function is called  when RTC_ALARM interrupt took place, inside
-* RTC_ALARM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
-* a global variable "uwTick" used as application time base.
-* @param  hrtc RTC handle
-* @retval None
-*/
+*         RTC_ALARM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+*         a global variable "uwTick" used as application time base.
+* @return    void
+*******************************************************************************/
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef* hrtc)
 {
     __IO uint32_t counter = 0U;
@@ -220,10 +222,11 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef* hrtc)
     }
 }
 
-/**
-* @brief  This function handles RTC ALARM interrupt request.
-* @retval None
-*/
+/*!*****************************************************************************
+* @brief     This function handles RTC ALARM interrupt request.
+* @param[in] void
+* @return    void
+*******************************************************************************/
 void RTC_Alarm_IRQHandler(void)
 {
     HAL_RTC_AlarmIRQHandler(&m_timebase_rtc);
@@ -231,10 +234,11 @@ void RTC_Alarm_IRQHandler(void)
 
 #elif (HAL_TIMER_TIMEBASE == HAL_TIMER_TIMEBASE_TIM)
 
-/**
-* @brief  This function handles TIM interrupt request.
-* @retval None
-*/
+/*!*****************************************************************************
+* @brief     This function handles TIM interrupt request.
+* @param[in] void
+* @return    void
+*******************************************************************************/
 void TIM6_IRQHandler(void)
 {
     __HAL_TIM_CLEAR_IT(&m_timebase_timer, TIM_IT_UPDATE);
