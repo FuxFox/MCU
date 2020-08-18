@@ -9,7 +9,8 @@
 #ifndef HAL_DELAY_H
 #define HAL_DELAY_H
 
-/** @defgroup hal_delay
+/** 
+* @defgroup hal_delay
 * @ingroup HAL
 * @brief Blocking-Delay HAL Template
 * @details 

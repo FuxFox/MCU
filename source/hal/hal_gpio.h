@@ -9,7 +9,8 @@
 #ifndef HAL_GPIO_H
 #define HAL_GPIO_H
 
-/** @defgroup hal_gpio
+/** 
+* @defgroup hal_gpio
 * @ingroup HAL
 * @brief	GPIO HAL Template
 * @details 封装底层io配置，为上层应用提供统一的接口

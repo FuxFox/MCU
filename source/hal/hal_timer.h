@@ -9,7 +9,8 @@
 #ifndef HAL_TIMER_H
 #define HAL_TIMER_H
 
-/** @defgroup hal_timer
+/** 
+* @defgroup hal_timer
 * @ingroup HAL
 * @brief	 Timer HAL Template
 * @details 配置硬件定时器，尤其是要为 app_timer 提供的时基
