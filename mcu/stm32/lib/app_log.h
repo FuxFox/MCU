@@ -1,39 +1,34 @@
 /*******************************************************************************
- *
- * Module: log
- *           
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/10/22 10:51          V1.0             build this file
- *
- *******************************************************************************/
-/*!
- * \file     log.h
- * \author   FuxFox
- * \version  V1.0
- * \date       2019/10/22
- *******************************************************************************/
+*
+* Module: log
+*           
+* History:
+*    <author>         <time>             <version>             <desc>
+*      FuxFox          2019/10/22 10:51          V1.0             build this file
+*
+*******************************************************************************/
 #ifndef LOG_H
 #define LOG_H
 
-/*! \defgroup log_public Public
-\ingroup log
-\brief            simple LOG module , used SEGGER RTT
-\details 
+/**
+* @defgroup app_log
+* @ingroup lib
+* @brief  simple LOG module , used SEGGER RTT
+* @details 
 * @{ */
 
 #include "app_config.h"
 #include "SEGGER_RTT.h"
-//********************************* Module Config *******************************/
-                                
+/*================================= Module Config ============================*/
+
 #define APP_LOG_CHANNEL_DEF 0
 
 #ifndef APP_LOG_MODULE_SYMBLE
 #define APP_LOG_MODULE_SYMBLE "USER"
 #endif
-//********************************* Data Type ***********************************/
+/*================================= Data Type ================================*/
 
-/*! log type enum */
+/** log type enum */
 typedef enum
 {
 	APP_LOG_LEVEL_NONE,
@@ -43,20 +38,20 @@ typedef enum
 	APP_LOG_LEVEL_DEBUG
 }app_log_level_t;
 
-//********************************* Public Interface ****************************/
+/*================================= Public Interface =========================*/
 
 /*!*****************************************************************************
-\brief      initialize
-\param[in]    void
-\return     void
+* @brief      initialize
+* @param[in]    void
+* @return     void
 ******************************************************************************/
 void app_log_init(void);
 
 /*!*****************************************************************************
-\brief      print an array in HEX mode
-\param[in]    uint8_t * arry
-\param[in]    uint8_t size
-\return     void
+* @brief      print an array in HEX mode
+* @param[in]    uint8_t * arry
+* @param[in]    uint8_t size
+* @return     void
 ******************************************************************************/
 void app_log_print_array_to_hex(uint8_t* arry, uint8_t size);
 
@@ -95,5 +90,5 @@ void app_log_print_array_to_hex(uint8_t* arry, uint8_t size);
 #endif
 
 
-/*! @}*/ //end of group log
+/** @}*/ //end of group log
 #endif // LOG_H
