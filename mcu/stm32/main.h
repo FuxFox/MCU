@@ -1,25 +1,19 @@
 /*******************************************************************************
- * LICENSE : Apache 2.0
- *           
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox	      2019/12/20 18:49          V1.0             build this file
- *
- *******************************************************************************/
-/*!
- * \file     main.h
- * \brief    main.h for STM32
- * \author   FuxFox
- * \version  V1.0
- * \date  	 2019/12/20
- *******************************************************************************/
+* LICENSE : Apache 2.0
+*           
+* History:
+*    <author>         <time>             <version>             <desc>
+*      FuxFox	      2019/12/20 18:49          V1.0             build this file
+*
+*******************************************************************************/
 #ifndef MAIN_H
 #define MAIN_H
 
-/*! \defgroup main_public Public
-\ingroup main
-\brief 
-\details 
+/**
+* @defgroup main
+* @ingroup main
+* @brief
+* @details
 * @{ */
 
 #ifdef __cplusplus
@@ -40,5 +34,5 @@ extern "C" {
 #endif
 
 
-/*! @}*/ //end of group main
+/** @}*/ //end of group main
 #endif // MAIN_H

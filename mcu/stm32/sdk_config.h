@@ -1,22 +1,21 @@
-/*******************************************************************************
- * LICENSE : Apache 2.0
- *           
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/12/07 14:48          V1.0             build this file
- *
- *******************************************************************************/
-/*!
- * \file     sdk_config.h
- * \brief    This file implemented for STM32F103xxx
- * \author   FuxFox
- * \version  V1.0
- * \date       2019/12/07
- *******************************************************************************/
+/*!*****************************************************************************
+* @file     sdk_config.h
+* @brief    This file implemented for STM32F103xxx
+* @author   FuxFox
+* @version  V1.0
+* @date     2019/12/07
+*******************************************************************************/
 #ifndef SDK_CONFIG_H
 #define SDK_CONFIG_H
 
-/**************************** CMSIS Configure Wizard *******************/
+/**
+* @defgroup  sdk_config
+* @ingroup config
+* @brief
+* @details
+* @{ */
+
+/*========================= CMSIS Configure Wizard ===========================*/
 
 // <<< Use Configuration Wizard in Context Menu >>>\n
 
@@ -46,7 +45,8 @@
 
 // <o> HSE_VALUE - External High Speed oscillator (HSE) value.
 //==========================================================
-// <i> This value is used by the RCC HAL module to compute the system frequency (when HSE is used as system clock source, directly or through the PLL).  
+// <i> This value is used by the RCC HAL module to compute the system frequency
+// <i> (when HSE is used as system clock source, directly or through the PLL).  
 // <i> Value of the External oscillator in Hz
 #ifndef HSE_VALUE
 #define HSE_VALUE    ((uint32_t)8000000) 
@@ -83,7 +83,8 @@
 
 // <o> HSI_VALUE - High Speed Internal oscillator (HSI) value.
 //==========================================================
-// <i> This value is used by the RCC HAL module to compute the system frequency (when HSI is used as system clock source, directly or through the PLL).  
+// <i> This value is used by the RCC HAL module to compute the system frequency
+// <i> (when HSI is used as system clock source, directly or through the PLL).  
 // <i> Value of the Internal oscillator in Hz
 #ifndef  HSI_VALUE 
 #define HSI_VALUE    ((uint32_t)8000000) 
@@ -144,7 +145,8 @@
 
 // <o> LSI_VALUE - Internal Low Speed oscillator (LSI) value.
 //==========================================================
-// <i> Value of the Internal Low Speed oscillator in Hz The real value may vary depending on the variations in voltage and temperature.
+// <i> Value of the Internal Low Speed oscillator in Hz.
+// <i> The real value may vary depending on the variations in voltage and temperature.
 // <i> LSI Typical Value in Hz
 #ifndef  LSI_VALUE
 #define LSI_VALUE    40000U
@@ -943,6 +945,7 @@
 
 
 
+/** @}*/ //end of group sdk_config
 
 #endif //SDK_CONFIG_H
 

@@ -1,42 +1,35 @@
-/*******************************************************************************
- *
- * Module: BoardConfig
- *
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/05/21 11:07          V1.0             build this file
- *
- *******************************************************************************/
- /*!
-  * \file     app_config.h
-  * \brief    
-  * \author   FuxFox
-  * \version  V1.0
-  * \date       2019/05/21
-  *******************************************************************************/
+/*!*****************************************************************************
+* @file     app_config.h
+* @brief    
+* @author   FuxFox
+* @version  V1.0
+* @date       2019/05/21
+*******************************************************************************/
 #ifndef APP_CONFIG_H
 #define APP_CONFIG_H
 
-  /*! \defgroup  BoardConfig
-  \brief 
-  \details
-  * @{ */
+/**
+* @defgroup  app_config
+* @ingroup config
+* @brief 
+* @details
+* @{ */
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/**************************** Macro ************************************/
+/*=========================== Custom Board ===================================*/
 #include "custom_board.h"
 
-/**************************** Standard header *********************************/
+/*=========================== Standard header ================================*/
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
-/**************************** SDK **************************************/
+/*=========================== SDK ============================================*/
 #include "sdk_config.h"
 
 #include "stm32f103xe.h"
@@ -45,11 +38,11 @@ extern "C" {
 
 typedef enum
 {
-        OFF = 0,
-        ON = 1
+	OFF = 0,
+	ON = 1
 }SWITCH_enum;
 
-/**************************** CMSIS Configure Wizard *******************/
+/*=========================== CMSIS Configure Wizard =========================*/
 
 // <<< Use Configuration Wizard in Context Menu >>>\n
 
@@ -187,35 +180,34 @@ typedef enum
 
 
 
-/********************************* drver config ***************************************/
+/*=========================== drver config ===================================*/
 
 
 
 
 
-//======================EEPROM_24c02============================
+//=========================== EEPROM_24c02 =====================================
 #define CFG_EEPROM_TYPE            AT24C01
 #define CFG_EEPROM_ADDR             0xA0
 #define CFG_EEPROM_SDA            PIN_FLASH_I2C_SDA
 #define CFG_EEPROM_SCL            PIN_FLASH_I2C_SCL
 
-//======================temp_board============================
+//=========================== temp_board =======================================
 #define CFG_PCT2075GV_SDA        PIN_TEMP_I2C_SDA
 #define CFG_PCT2075GV_SCL        PIN_TEMP_I2C_SCL
 #define CFG_PCT2075GV_ADDR        0x92
 
-/********************************* module config ***************************************/
+/*=========================== module config ==================================*/
 
-//======================weight_sensor============================
+//=========================== weight_sensor ====================================
 #define CFG_WEIGHT_SENSOR_CFG_ADDR                0x0
 #define CFG_WEIGHT_SENSOR_CFG_VALID_FLAG        0xFA
 #define CFG_WEIGHT_SENSOR_UNIT_GRAM                500
 
-/********************************* module config ***************************************/
 
 #ifdef __cplusplus
 }
 #endif
 
-/*! @}*/ //end of group BoardConfig
+/** @}*/ //end of group BoardConfig
 #endif // app_config_H
