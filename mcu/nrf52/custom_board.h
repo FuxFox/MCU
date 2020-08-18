@@ -1,25 +1,17 @@
-/*******************************************************************************
- *
- * Module: custom_board
- *
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/08/01 10:30          V1.0             build this file
- *
- *******************************************************************************/
- /*!
-  * \file     custom_board.h
-  * \brief    Customer board pin define for nrf52832
-  * \author   FuxFox
-  * \version  V1.0
-  * \date       2019/08/01
-  *******************************************************************************/
+/*!*****************************************************************************
+* @file     custom_board.h
+* @brief    Customer board pin define for nrf52832
+* @author   FuxFox
+* @version  V1.0
+* @date     2019/08/01
+*******************************************************************************/
 #ifndef CUSTOM_BOARD_H
 #define CUSTOM_BOARD_H
 
-/*! \defgroup custom_board_public Public
-\ingroup custom_board
-\details  GPIO pin allocation
+/**
+* @defgroup custom_board
+* @ingroup config
+* @details  GPIO pin allocation
 * @{ */
 
 #define LED_START      30
@@ -80,5 +72,5 @@
 
 #define IN1_D              28
 #define IN2_D              27
-/*! @}*/ //end of group custom_board
+/** @}*/ //end of group custom_board
 #endif // CUSTOM_BOARD_H

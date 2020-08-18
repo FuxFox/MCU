@@ -1,25 +1,20 @@
-/*******************************************************************************
- * Module: main
- *
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/07/26 14:49          V1.0             build this file
- *
- *******************************************************************************/
- /*!
-  * \file     main.c
-  * \brief      main for nrf52832
-  * \author   FuxFox
-  * \version  V1.0
-  * \date       2019/07/26
-  *******************************************************************************/
+/*!*****************************************************************************
+* @file     main.c
+* @brief    main for nrf52832
+* @author   FuxFox
+* @version  V1.0
+* @date     2019/07/26
+*******************************************************************************/
 #ifndef MAIN_C
 #define MAIN_C
 
 #include "main.h"
 
-  /**@brief Function for application main entry.
-   */
+/*!*****************************************************************************
+* @brief     Function for application main entry.
+* @param[in] void
+* @return    int
+*******************************************************************************/
 int main(void)
 {
     // Initialize.
@@ -42,14 +37,12 @@ int main(void)
     }
 }
 
-
-
 /*!*****************************************************************************
-\brief      nrf pre-initialize
-\details
-\param[in]    void
-\return     void
-******************************************************************************/
+* @brief      nrf pre-initialize
+* @details
+* @param[in]    void
+* @return     void
+*******************************************************************************/
 static void main_nrf_preinit(void)
 {
     log_init();
@@ -59,10 +52,11 @@ static void main_nrf_preinit(void)
 
 }
 
-/**@brief Function for the Timer initialization.
- *
- * @details Initializes the timer module.
- */
+/*!*****************************************************************************
+* @brief     Function for the Timer initialization.
+* @param[in] void
+* @return    void
+*******************************************************************************/
 static void timers_init(void)
 {
     // Initialize timer module, making it use the scheduler
@@ -70,7 +64,11 @@ static void timers_init(void)
     APP_ERROR_CHECK(err_code);
 }
 
-
+/*!*****************************************************************************
+* @brief     Function for initializing log output
+* @param[in] void
+* @return    void
+*******************************************************************************/
 static void log_init(void)
 {
     ret_code_t err_code = NRF_LOG_INIT(NULL);
@@ -79,8 +77,11 @@ static void log_init(void)
     NRF_LOG_DEFAULT_BACKENDS_INIT();
 }
 
-/**@brief Function for initializing power management.
- */
+/*!*****************************************************************************
+* @brief     Function for initializing power management.
+* @param[in] void
+* @return    void
+*******************************************************************************/
 static void power_management_init(void)
 {
     ret_code_t err_code;
@@ -88,11 +89,12 @@ static void power_management_init(void)
     APP_ERROR_CHECK(err_code);
 }
 
-
-/**@brief Function for handling the idle state (main loop).
- *
- * @details If there is no pending log operation, then sleep until next the next event occurs.
- */
+/*!*****************************************************************************
+* @brief     Function for handling the idle state (main loop).
+* @details If there is no pending log operation, then sleep until next the next event occurs.
+* @param[in] void
+* @return    void
+*******************************************************************************/
 static void idle_state_handle(void)
 {
     if (NRF_LOG_PROCESS() == false)
@@ -101,17 +103,16 @@ static void idle_state_handle(void)
     }
 }
 
-/**@brief Function for assert macro callback.
- *
- * @details This function will be called in case of an assert in the SoftDevice.
- *
- * @warning This handler is an example only and does not fit a final product. You need to analyze
- *          how your product is supposed to react in case of Assert.
- * @warning On assert from the SoftDevice, the system can only recover on reset.
- *
- * @param[in] line_num    Line number of the failing ASSERT call.
- * @param[in] p_file_name File name of the failing ASSERT call.
- */
+/*!*****************************************************************************
+* @brief     Function for assert macro callback.
+* @details This function will be called in case of an assert in the SoftDevice.
+* @warning This handler is an example only and does not fit a final product. You need to analyze
+*          how your product is supposed to react in case of Assert.
+* @warning On assert from the SoftDevice, the system can only recover on reset.
+* @param[in] line_num    Line number of the failing ASSERT call.
+* @param[in] p_file_name File name of the failing ASSERT call.
+* @return    void
+*******************************************************************************/
 void assert_nrf_callback(uint16_t line_num, const uint8_t* p_file_name)
 {
     app_error_handler(DEAD_BEEF, line_num, p_file_name);

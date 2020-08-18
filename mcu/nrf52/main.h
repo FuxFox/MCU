@@ -1,25 +1,18 @@
 /*******************************************************************************
- * Module: main
- *           
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/05/21 11:40          V1.0             build this file
- *
- *******************************************************************************/
-/*!
- * \file     main.h
- * \brief    main.h for nrf52832
- * \author   FuxFox
- * \version  V1.0
- * \date       2019/05/21
- *******************************************************************************/
+* Module: main
+*
+* History:
+*    <author>         <time>             <version>             <desc>
+*      FuxFox          2019/05/21 11:40          V1.0             build this file
+*
+*******************************************************************************/
 #ifndef MAIN_H
 #define MAIN_H
 
-/*! \defgroup main_public Public
-\ingroup main
-\brief 
-\details 
+/**
+* @defgroup main
+* @brief
+* @details
 * @{ */
 
 
@@ -38,5 +31,5 @@ static void log_init(void);
 static void power_management_init(void);
 static void idle_state_handle(void);
 
-/*! @}*/ //end of group main
+/** @}*/ //end of group main
 #endif // MAIN_H
