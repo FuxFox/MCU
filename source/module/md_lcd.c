@@ -1,29 +1,15 @@
-/*******************************************************************************
- * Module: md_lcd
- *
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/09/24 16:27          V1.0             build this file
- *
- *******************************************************************************/
- /*!
-  * \file     md_lcd.c
-  * \brief
-  * \author   FuxFox
-  * \version  V1.0
-  * \date       2019/09/24
-  *******************************************************************************/
+/*!****************************************************************************
+* @file     md_lcd.c
+* @brief
+* @author   FuxFox
+* @version  V1.0
+* @date     2019/09/24
+*******************************************************************************/
 #ifndef MD_LCD_C
 #define MD_LCD_C
 
 #include "md_lcd.h"
 
-  /*!*****************************************************************************
-  \brief      initialize
-  \details
-  \param[in]    void
-  \return     void
-  ******************************************************************************/
 void md_lcd_init(void)
 {
     drv_lcd_clear(MD_LCD_BACKGRAUND_COLOR);
@@ -31,16 +17,6 @@ void md_lcd_init(void)
     md_lcd_show_string(10, 10, "hello");
 }
 
-/*!*****************************************************************************
-\brief        draw a char
-\details
-\param[in]    uint16_t x £º x coordinate
-\param[in]    uint16_t y £º y coordinate
-\param[in]    uint8_t chr : ascii char
-\param[in]    md_lcd_font_enum font £º
-\param[in]    bool draw_background £º
-\return       void
-******************************************************************************/
 void md_lcd_show_charEx(uint16_t x, uint16_t y, uint8_t chr, md_lcd_font_enum font_size, bool draw_background)
 {
     uint8_t temp, mask, i, font_height;
@@ -101,15 +77,6 @@ void md_lcd_show_charEx(uint16_t x, uint16_t y, uint8_t chr, md_lcd_font_enum fo
     }
 }
 
-/*!*****************************************************************************
-\brief      show string
-\details
-\param[in]    uint16_t x,y :    start coordinate
-\param[in]    uint8_t * str £º  string to be printed.(must end with '\0')
-\param[in]    md_lcd_font_enum font £º
-\param[in]    bool draw_background £º if true, renew background
-\return     void
-******************************************************************************/
 void md_lcd_show_stringEx(uint16_t x, uint16_t y, char* str, md_lcd_font_enum font, bool draw_background)
 {
     uint16_t x0 = x;
@@ -160,15 +127,6 @@ void md_lcd_show_stringEx(uint16_t x, uint16_t y, char* str, md_lcd_font_enum fo
     }
 }
 
-/*!*****************************************************************************
-\brief      show bitmap icon
-\details
-\param[in]    uint16_t x    x coordinate
-\param[in]    uint16_t y    y coordinate
-\param[in]    lib_image_struct * image
-\param[in]    bool draw_background  If true, renew background
-\return     void
-******************************************************************************/
 void md_lcd_show_image(uint16_t x, uint16_t y, const lib_image_struct* image, bool draw_background)
 {
     uint8_t temp, mask, i;
@@ -204,16 +162,6 @@ void md_lcd_show_image(uint16_t x, uint16_t y, const lib_image_struct* image, bo
     }
 }
 
-/*!*****************************************************************************
-\brief      print number
-\details
-\param[in]    uint16_t x
-\param[in]    uint16_t y
-\param[in]    int number
-\param[in]    md_lcd_font_enum font
-\param[in]    bool draw_background      If true, renew background
-\return     void
-******************************************************************************/
 void md_lcd_show_numberEx(uint16_t x, uint16_t y, int number, md_lcd_font_enum font, bool draw_background)
 {
     char str[12];

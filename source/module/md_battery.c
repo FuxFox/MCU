@@ -1,19 +1,10 @@
-/*******************************************************************************
- *
- * Module: md_battery
- *
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox	      2019/07/26 15:30          V1.0             build this file
- *
- *******************************************************************************/
- /*!
-  * \file     md_battery.c
-  * \brief
-  * \author   FuxFox
-  * \version  V1.0
-  * \date  	 2019/07/26
-  *******************************************************************************/
+/*!*****************************************************************************
+* @file     md_battery.c
+* @brief
+* @author   FuxFox
+* @version  V1.0
+* @date  	2019/07/26
+*******************************************************************************/
 #ifndef MD_BATTERY_C
 #define MD_BATTERY_C
 
@@ -37,12 +28,13 @@ static const uint16_t m_voltage_percent_table[11] = {
     /*300*/  MD_BATTERY_LEST_VOLTAGE, 351, 358, 362, 365, 368, 373, 379, 387, 397, MD_BATTERY_FULL_VOLTAGE
 };
 
-/*!*****************************************************************************
-\brief  	battery voltage level detect init
-\details
-\param[in]	battery_change_callback		Will be call if battery voltage change greater than 1%. Can be NULL.
-\return     void
-******************************************************************************/
+static void md_battery_adc_config(void);
+static void md_battery_get_first_data(void);
+static uint16_t md_battery_GetAverageVoltage(void);
+static void md_battery_detect_TimerHandler(void* context);
+static uint16_t md_battery_get_sample(void);
+static uint8_t md_battery_get_percentEx(void);
+
 void md_battery_init(battery_change_callback callback)
 {
 #if MD_BATTERY_CHARGING_SUPPORT
@@ -60,13 +52,13 @@ void md_battery_init(battery_change_callback callback)
 
 //saadc callback function
 void md_battery_saadc_callback(nrf_drv_saadc_evt_t const* p_event) {/*do nothing*/ }
+
 /*!*****************************************************************************
-\brief  	adc init
-\details
-\param[in]	void
-\return     void
-******************************************************************************/
-void md_battery_adc_config(void)
+* @brief  	adc init
+* @param[in]	void
+* @return     void
+*******************************************************************************/
+static void md_battery_adc_config(void)
 {
     ret_code_t err_code;
 
@@ -80,11 +72,11 @@ void md_battery_adc_config(void)
 }
 
 /*!*****************************************************************************
-\brief  	get first data when power on
-\details
-\param[in]	void
-\return     void
-******************************************************************************/
+* @brief  	get first data when power on
+* @details
+* @param[in]	void
+* @return     void
+*******************************************************************************/
 static void md_battery_get_first_data(void)
 {
     uint8_t i;
@@ -108,12 +100,6 @@ static void md_battery_get_first_data(void)
     NRF_LOG_DEBUG("battery: %dV , %d%%, %dmah\r\n", m_battery_sta.average_voltage, m_battery_sta.battery_percent, m_battery_sta.battery_mah);
 }
 
-/*!*****************************************************************************
-\brief  	is charging?
-\details
-\param[in]	void
-\return     bool TRUE£ºcharging£¬FALSE£ºno charging
-******************************************************************************/
 bool md_battery_is_charging(void)
 {
 #if MD_BATTERY_CHARGING_SUPPORT
@@ -125,12 +111,11 @@ bool md_battery_is_charging(void)
 }
 
 /*!*****************************************************************************
-\brief  	get average voltage
-\details
-\param[in]	void
-\return     int16_t voltage, unit: 10mV
-******************************************************************************/
-uint16_t md_battery_GetAverageVoltage(void)
+* @brief  	get average voltage
+* @param[in]	void
+* @return     int16_t voltage, unit: 10mV
+*******************************************************************************/
+static uint16_t md_battery_GetAverageVoltage(void)
 {
     uint8_t i = 0;
     uint32_t sum = 0;
@@ -163,33 +148,20 @@ uint16_t md_battery_GetAverageVoltage(void)
     return m_battery_sta.average_voltage;
 }
 
-/*!*****************************************************************************
-\brief  	get average voltage
-\details
-\param[in]	void
-\return     uint16_t	voltage, unit: 10mV
-******************************************************************************/
 uint16_t md_battery_get_voltage(void)
 {
     return m_battery_sta.average_voltage;
 }
 
-/*!*****************************************************************************
-\brief  	get battery percent
-\details
-\param[in]	void
-\return
-******************************************************************************/
 uint8_t md_battery_get_percent(void)
 {
     return m_battery_sta.battery_percent;
 }
 
 /*!*****************************************************************************
-\brief  	get battery percent
-\details
-\return     uint8_t
-******************************************************************************/
+* @brief  	get battery percent
+* @return     uint8_t
+*******************************************************************************/
 static uint8_t md_battery_get_percentEx(void)
 {
     uint8_t percent = 100;
@@ -250,12 +222,10 @@ static uint8_t md_battery_get_percentEx(void)
 }
 
 /*!*****************************************************************************
-\brief  	detection timer handler
-\details
-\param[in]	void * context
-\return     void
-\author		FuxFox 2019/06/01 11:01
-******************************************************************************/
+* @brief  	detection timer handler
+* @param[in]	void * context
+* @return     void
+*******************************************************************************/
 static void md_battery_detect_TimerHandler(void* context)
 {
     m_battery_sta.sample_buffer[m_battery_sta.buffer_index++] = md_battery_get_sample();
@@ -281,11 +251,10 @@ static void md_battery_detect_TimerHandler(void* context)
 }
 
 /*!*****************************************************************************
-\brief  	get battery voltage
-\details
-\param[in]	void
-\return     uint16_t
-******************************************************************************/
+* @brief  	get battery voltage
+* @param[in]	void
+* @return     uint16_t
+*******************************************************************************/
 static uint16_t md_battery_get_sample(void)
 {
     nrf_saadc_value_t saadc_val = 0;

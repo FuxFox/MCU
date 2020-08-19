@@ -1,30 +1,19 @@
-/*******************************************************************************
- * Module: md_m26
- *
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/09/05 14:05          V1.0             build this file
- *
- *******************************************************************************/
- /*!
-  * \file     md_m26.c
-  * \brief
-  * \author   FuxFox
-  * \version  V1.0
-  * \date       2019/09/05
-  *******************************************************************************/
+/*!*****************************************************************************
+* @file     md_m26.c
+* @brief
+* @author   FuxFox
+* @version  V1.0
+* @date     2019/09/05
+*******************************************************************************/
 #ifndef MD_M26_C
 #define MD_M26_C
 
 #include "md_m26.h"
 
 static error_handler m_error_handler = NULL;
-/*!*****************************************************************************
-\brief      initialize
-\details
-\param[in]    void
-\return     bool    TRUE if success
-******************************************************************************/
+static void md_m26_configure(void);
+static bool md_m26_check_ready(void);
+
 bool md_m26_init(error_handler handler)
 {
     m_error_handler = handler;
@@ -37,12 +26,6 @@ bool md_m26_init(error_handler handler)
     return md_m26_reinit();
 }
 
-/*!*****************************************************************************
-\brief      re-initialize
-\details
-\param[in]    void
-\return     bool TRUE if success
-******************************************************************************/
 bool md_m26_reinit(void)
 {
     if (!drv_m26_reinit())
@@ -63,14 +46,7 @@ bool md_m26_reinit(void)
     };
     return true;
 }
-/*!*****************************************************************************
-\brief      send command and check ACK
-\details
-\param[in]    const char * str      AT command string
-\param[in]    const char * ack      expectant ACK string
-\param[in]    uint32_t wait_ms      max waiting time, in ms
-\return     bool TRUE if success
-******************************************************************************/
+
 bool md_m26_send_check_ack_ms(const char* str, const char* ack, uint32_t wait_ms)
 {
     char buff[32];
@@ -81,14 +57,6 @@ bool md_m26_send_check_ack_ms(const char* str, const char* ack, uint32_t wait_ms
     return strstr(buff, ack);
 }
 
-/*!*****************************************************************************
-\brief      send command and get ACK
-\details
-\param[in]    const char * str      AT command string
-\param[in]    const char * ack      Buffer to receive ACK
-\param[in]    uint32_t wait_ms      max waiting time, in ms
-\return     void
-******************************************************************************/
 void md_m26_send_and_get_ack(const char* str, char* ack, uint32_t len, uint32_t wait_ms)
 {
     nrf_delay_ms(10);
@@ -96,14 +64,13 @@ void md_m26_send_and_get_ack(const char* str, char* ack, uint32_t len, uint32_t 
 }
 
 /*!*****************************************************************************
-\brief      M26 module configure
-            echo off,
-            baud rate 115200,
-            disable NITZ
-\details
-\param[in]    void
-\return     void
-******************************************************************************/
+* @brief      M26 module configure
+*           echo off,
+*           baud rate 115200,
+*           disable NITZ
+* @param[in]    void
+* @return     void
+*******************************************************************************/
 static void md_m26_configure(void)
 {
     md_m26_send_check_ack("ATE0\r", "ATE0\r\nOK");
@@ -111,13 +78,11 @@ static void md_m26_configure(void)
     md_m26_send_check_ok("AT+QNITZ=0\r");//disable NITZ
 }
 
-
 /*!*****************************************************************************
-\brief      configure and check Internet connection
-\details
-\param[in]    void
-\return     bool : TRUE if success
-******************************************************************************/
+* @brief      configure and check Internet connection
+* @param[in]    void
+* @return     bool : TRUE if success
+*******************************************************************************/
 static bool md_m26_check_ready(void)
 {
     md_m26_send_check_ok("AT+QREFUSECS=1,1\r"); //reject phone call and SMS
@@ -152,12 +117,6 @@ static bool md_m26_check_ready(void)
     return true;
 }
 
-/*!*****************************************************************************
-\brief      set HTTP url
-\details
-\param[in]    void
-\return     void
-******************************************************************************/
 bool md_m26_http_set_url(const char* url)
 {
     char str[20];
@@ -167,15 +126,6 @@ bool md_m26_http_set_url(const char* url)
     return md_m26_send_check_ack_ms(url, "OK", 2000);
 }
 
-/*!*****************************************************************************
-\brief      HTTP get request
-\details
-\param[out]    char* response   buffer to receive response from server
-\param[in]    size_t resp_size       size of receive buffer
-\return     size_t              actually size of received data
-\note
-        The response return from M26 is start with "CONNECT"
-******************************************************************************/
 size_t md_m26_http_get(char* url, char* response, size_t resp_size)
 {
     char str[24];
@@ -186,16 +136,6 @@ size_t md_m26_http_get(char* url, char* response, size_t resp_size)
     return drv_m26_TxRx("AT+QHTTPREAD=30\r", response, resp_size, 30000);
 }
 
-/*!*****************************************************************************
-\brief      HTTP post and get response
-\details
-\param[in]    char * post       POST data
-\param[in]    char * response   buffer to receive response from server
-\param[in]    size_t size       size of response received buffer
-\return     size_t            actually size of received data
-\note
-        The response return from M26 is start with "CONNECT"
-******************************************************************************/
 size_t md_m26_http_post(char* url, char* post, char* response, size_t resp_size)
 {
     char str[24];
@@ -218,12 +158,6 @@ size_t md_m26_http_post(char* url, char* post, char* response, size_t resp_size)
     return drv_m26_TxRx("AT+QHTTPREAD=40\r", response, resp_size, 30000);
 }
 
-/*!*****************************************************************************
-\brief      get local time from M26. Format£ºyy/mm/dd, hh:mm:ss+zz
-\details
-\param[in]    char * time       receive buffer, size > 22
-\return     bool TRUE if success
-******************************************************************************/
 bool md_m26_get_time(char* time)
 {
     char buff[32];
@@ -249,12 +183,6 @@ bool md_m26_get_time(char* time)
     return false;
 }
 
-/*!*****************************************************************************
-\brief      GET M26 IMEI
-\details        15 digit number
-\param[in]    uint8_t * res         a buffer to receive IMEI, size >= 16
-\return     bool   TRUE if success
-******************************************************************************/
 bool md_m26_get_IMEI(char* res)
 {
     char tmp[24];

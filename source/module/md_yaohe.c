@@ -1,23 +1,18 @@
-/*******************************************************************************
- * Module: md_yaohe
- *
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/09/16 14:10          V1.0             build this file
- *
- *******************************************************************************/
- /*!
-  * \file     md_yaohe.c
-  * \brief
-  * \author   FuxFox
-  * \version  V1.0
-  * \date       2019/09/16
+ /*!*****************************************************************************
+  * @file     md_yaohe.c
+  * @brief
+  * @author   FuxFox
+  * @version  V1.0
+  * @date     2019/09/16
   *******************************************************************************/
 #ifndef MD_YAOHE_C
 #define MD_YAOHE_C
 
 #include "md_yaohe.h"
 
+static void md_yaohe_https_config(void);
+static bool md_yaohe_send_post_waite_succeed(/*cJSON* root*/char* post);
+static bool md_yaohe_send_post_and_recieve(char* post, char* response, size_t rx_size);
 static uint32_t md_MedicationPlanVer = 0;
 static char m_serial_number[16];
 static char m_plan_content[MD_YAOHE_MEDICATION_PLAN_BUFF_SIZE];
@@ -65,13 +60,6 @@ fLdFsNsahoXJ16hSyUqGq4zEDc+lmGsX\r\n\
 -----ENDCERTIFICATE-----\r\n";
  */
 
-
- /*!*****************************************************************************
- \brief      initialize
- \details
- \param[in]    void
- \return    TRUE if success
- ******************************************************************************/
 bool md_yaohe_init()
 {
     //        md_yaohe_https_config();
@@ -95,22 +83,16 @@ bool md_yaohe_init()
     return true;
 }
 
-/*!*****************************************************************************
-\brief      get serial number
-\details
-\param[in]    void
-\return     char*
-******************************************************************************/
 char* md_yaohe_get_serial_number(void)
 {
     return m_serial_number;
 }
+
 /*!*****************************************************************************
-\brief      HTTPS configure
-\details
-\param[in]    void
-\return     void
-******************************************************************************/
+* @brief      HTTPS configure
+* @param[in]    void
+* @return     void
+*******************************************************************************/
 static void md_yaohe_https_config(void)
 {
     //        md_m26_send_check_ack_ms("AT+QSECWRITE=\"RAM:ca_cert.pem\",2530\r", "CONNECT", 300);//upload ca certificate
@@ -126,12 +108,7 @@ static void md_yaohe_https_config(void)
 //         md_m26_send_check_ack_ms("AT+QSSLCFG=\"smtpsctxi\"\r", "+QSSLCFG=\"smtpsctxi\",1 OK\r", 300); 
 
 }
-/*!*****************************************************************************
-\brief      handshake with server
-\details
-\param[in]    void
-\return     0 if failure
-******************************************************************************/
+
 bool md_yaohe_server_handshake(void)
 {
     char post[160];
@@ -162,12 +139,6 @@ bool md_yaohe_server_handshake(void)
     */
 }
 
-/*!*****************************************************************************
-\brief      sync
-\details
-\param[in]    void
-\return     void
-******************************************************************************/
 void md_yaohe_medication_plans_sync(void)
 {
     char* remindertimerId, * ptr_position, data[80];
@@ -282,12 +253,6 @@ void md_yaohe_medication_plans_sync(void)
 
 }
 
-/*!*****************************************************************************
-\brief      notify alarm event to server
-\details
-\param[in]    void
-\return     void
-******************************************************************************/
 bool md_yaohe_alarm_notify(md_yaohe_msg_enum msg, char* id, uint8_t hour, uint8_t min)
 {
     char* cmd, post[200];
@@ -333,12 +298,6 @@ bool md_yaohe_alarm_notify(md_yaohe_msg_enum msg, char* id, uint8_t hour, uint8_
 
 }
 
-/*!*****************************************************************************
-\brief      notify door action
-\details
-\param[in]    md_yaohe_door_action_enum msg
-\return     void
-******************************************************************************/
 bool md_yaohe_door_action_notify(md_yaohe_door_action_enum msg)
 {
     char* cmd, post[95];
@@ -381,13 +340,12 @@ bool md_yaohe_door_action_notify(md_yaohe_door_action_enum msg)
 
 
 /*!*****************************************************************************
-\brief      POST and get response
-\details
-\param[in]    char * post       POST buffer
-\param[in]    char * response   Receive buffer
-\param[in]    size_t rx_size    Expectant size to receive
-\return     bool  Not zero if success
-******************************************************************************/
+* @brief      POST and get response
+* @param[in]    char * post       POST buffer
+* @param[in]    char * response   Receive buffer
+* @param[in]    size_t rx_size    Expectant size to receive
+* @return     bool  Not zero if success
+*******************************************************************************/
 static bool md_yaohe_send_post_and_recieve(char* post, char* response, size_t rx_size)
 {
     if (!md_m26_http_post(MD_YAOHE_POST_URL, post, response, rx_size))
@@ -400,11 +358,10 @@ static bool md_yaohe_send_post_and_recieve(char* post, char* response, size_t rx
 }
 
 /*!*****************************************************************************
-\brief      sent post and wait success
-\details
-\param[in]    char *post POST buffer
-\return     bool Not zero if success
-******************************************************************************/
+* @brief      sent post and wait success
+* @param[in]    char *post POST buffer
+* @return     bool Not zero if success
+*******************************************************************************/
 static bool md_yaohe_send_post_waite_succeed(char* post)
 {
     char response[64];
