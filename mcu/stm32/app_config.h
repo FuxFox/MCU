@@ -128,7 +128,7 @@ typedef enum
 //<o> APP_BUTTON_SCAN_INTERVAL - button scan interval in ms
 #define CFG_BUTTON_SCAN_INTERVAL                100
 
-//<o> APPG_BUTTON_DETECTION_DELAY - Ïû¶¶Ê±¼ä£¬ in ms
+//<o> APPG_BUTTON_DETECTION_DELAY - Shake off delay in ms
 #define CFG_BUTTON_DETECTION_DELAY                10
 
 //<o> APP_BUTTON_LONG_PRESS_DETECT_DELAY - long press detect
