@@ -3,16 +3,16 @@
 *           
 * History:
 *    <author>         <time>             <version>             <desc>
-*      FuxFox	      2020/07/08 16:05          V1.0             build this file
+*      FuxFox	      2020/06/23 15:11          V1.0             build this file
 *
 *******************************************************************************/
-#ifndef APP_JSON_H
-#define APP_JSON_H
+#ifndef HAL_DELAY_H
+#define HAL_DELAY_H
 
-/** 
-* @defgroup app_json
-* @ingroup lib
-* @brief
+/**
+* @defgroup hal_delay
+* @ingroup HAL
+* @brief Blocking-Delay. Implemented base on STM32F103 with HAL.
 * @details 
 * @{ */
 
@@ -20,9 +20,6 @@
 
 
 /*================================= Module Config ============================*/
-
-
-
 
 
 /*================================= Data Type ================================*/
@@ -33,40 +30,37 @@
 
 /*================================= Public Interface =========================*/
 
-void app_json_get_value_by_key(void);
+/*!*****************************************************************************
+* @brief      initialize the soft delay function
+*            call this function after system clock initialization.
+* @return     void
+*******************************************************************************/
+void hal_delay_init(void);
 
 /*!*****************************************************************************
-* @brief  	find json key-value by key from src,then return the pointer of value,
-*            return NULL if not found.
-* @param[in]	uint8_t * src
-* @param[in]	uint8_t * key
-* @return     uint8_t*
+* @brief      blocking delay in us
+* @param[in]    uint32_t nus
+* @return     void
 *******************************************************************************/
-uint8_t* app_json_find_value_by_key(uint8_t* src, uint8_t* key);
+void hal_delay_us(uint32_t nus);
 
 /*!*****************************************************************************
-* @brief  	return true if the string value of 'key' is match 'except_value'
-* @param[in]	uint8_t * src
-* @param[in]	uint8_t * key
-* @param[in]	uint8_t * except_value
-* @return     bool
+* @brief      blocking delay in ms
+* @param[in]    uint32_t nms
+* @note        SysTick->LOAD is 24bit register, therefore, the max delay of ms are:
+				nms <= 0xffffff / (SYSCLK / 8 / 1000),
+				SYSCLK unit: Hz, nms unit: ms,
+				if SYSCLK is 72000000 Hz, nms <= 1864
+* @return     void
 *******************************************************************************/
-bool app_json_is_str_match(uint8_t* src, uint8_t* key, uint8_t* except_value);
-
-/*!*****************************************************************************
-* @brief  	get uint8_t value from src by key
-* @param[in]	uint8_t * src
-* @param[in]	uint8_t * key
-* @return     uint8_t
-*******************************************************************************/
-uint8_t app_json_get_int8(uint8_t* src, uint8_t* key);
+#if defined(HAL_ENABLED)&&(HAL_ENABLED)
+#define hal_delay_ms(nms) HAL_Delay(nms)
+#else
+void hal_delay_ms(uint32_t nms);
+#endif
 
 
 
 
-
-
-
-
-/** @}*/ //end of group app_json
-#endif // APP_JSON_H
+/** @}*/ //end of group hal_delay
+#endif // HAL_DELAY_H

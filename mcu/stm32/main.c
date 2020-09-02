@@ -1,28 +1,21 @@
-/*******************************************************************************
- * LICENSE : Apache 2.0
- *           
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox	      2019/12/20 18:48          V1.0             build this file
- *
- *******************************************************************************/
-/*!
- * \file     main.c
- * \brief    main for STM32
- * \author   FuxFox
- * \version  V1.0
- * \date  	 2019/12/20
- *******************************************************************************/
+/*!*****************************************************************************
+* @file     main.c
+* @brief    main for STM32
+* @author   FuxFox
+* @version  V1.0
+* @date  	2019/12/20
+*******************************************************************************/
 #ifndef MAIN_C
 #define MAIN_C
 
 #include "main.h"
 #include "app_log.h"
 
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
+/*!*****************************************************************************
+* @brief     The application entry point.
+* @param[in] void
+* @return    int
+*******************************************************************************/
 int main(void)
 {
     main_preinit();
@@ -54,11 +47,11 @@ static void main_preinit(void)
     app_gpio_init();
 }
 
-
-/**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+/*!*****************************************************************************
+* @brief     System Clock Configuration
+* @param[in] void
+* @return    void
+*******************************************************************************/
 void SystemClock_Config(void)
 {
     RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };

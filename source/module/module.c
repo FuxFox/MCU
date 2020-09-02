@@ -1,47 +1,34 @@
-/*******************************************************************************
- * Module: module
- *
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/07/26 14:46          V1.0             build this file
- *
- *******************************************************************************/
- /*!
-  * \file     module.c
-  * \brief
-  * \author   FuxFox
-  * \version  V1.0
-  * \date       2019/07/26
-  *******************************************************************************/
+/*!*****************************************************************************
+* @file     module.c
+* @brief
+* @author   FuxFox
+* @version  V1.0
+* @date     2019/07/26
+*******************************************************************************/
 #ifndef MODULE_C
 #define MODULE_C
 
 #include "module.h"
+#include "driver.h"
+#include "md_battery.h"
 
+static bool md_shutdown_handler(nrf_pwr_mgmt_evt_t event);
+static void module_battery_change_callback(uint8_t battery_percent);
 
-  /*!*****************************************************************************
-  \brief      module layer initialize
-  \details
-  \param[in]    void
-  \return     void
-  ******************************************************************************/
 void module_init(void)
 {
 
 }
 
-
-
-/**@brief Handler for shutdown preparation.
- *
- * @details During shutdown procedures, this function will be called at a 1 second interval
- *          untill the function returns true. When the function returns true, it means that the
- *          app is ready to reset to DFU mode.
- *
- * @param[in]   event   Power manager event.
- *
- * @retval  True if shutdown is allowed by this power manager handler, otherwise false.
- */
+/*!*****************************************************************************
+* @brief     Handler for shutdown preparation.
+* @details During shutdown procedures, this function will be called at a 1 second interval
+*          untill the function returns true. When the function returns true, it means that the
+*          app is ready to reset to DFU mode.
+* @param[in] nrf_pwr_mgmt_evt_t event : Power manager event.
+* @return    bool
+* @retval   True if shutdown is allowed by this power manager handler, otherwise false.
+*******************************************************************************/
 static bool md_shutdown_handler(nrf_pwr_mgmt_evt_t event)
 {
     switch (event)
@@ -82,28 +69,17 @@ static bool md_shutdown_handler(nrf_pwr_mgmt_evt_t event)
 }
 
 //lint -esym(528, m_app_shutdown_handler)
-/**@brief Register application shutdown handler with priority 0.
- */
+/**
+* @brief Register application shutdown handler with priority 0.
+*/
 NRF_PWR_MGMT_HANDLER_REGISTER(md_shutdown_handler, 0);
 
 
-/**@brief Function for the LEDs initialization.
- *
- * @details Initializes all LEDs used by the application.
- */
- //static void leds_init(void)
- //{
- //        bsp_board_init(BSP_INIT_LEDS);
- //}
-
-
-
- /*!*****************************************************************************
- \brief      battery change callback handler
- \details
- \param[in]    void
- \return     void
- ******************************************************************************/
+/*!*****************************************************************************
+* @brief      battery change callback handler
+* @param[in]    void
+* @return     void
+*******************************************************************************/
 static void module_battery_change_callback(uint8_t battery_percent)
 {
 

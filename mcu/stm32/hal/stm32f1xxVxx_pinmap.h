@@ -1,19 +1,10 @@
-/*******************************************************************************
- *
- * Module: stm32f1xxVxx_pinmap
- *
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/10/12 14:22          V1.0             build this file
- *
- *******************************************************************************/
- /*!
-  * \file     stm32f1xxVxx_pinmap.h
-  * \brief
-  * \author   FuxFox
-  * \version  V1.0
-  * \date       2019/10/12
-  *******************************************************************************/
+/*!*****************************************************************************
+* @file     stm32f1xxVxx_pinmap.h
+* @brief	Pin number to gpio mapping, used for hal_gpio
+* @author   FuxFox
+* @version  V1.0
+* @date     2019/10/12
+*******************************************************************************/
 #ifndef STM32F1XXVXX_PINMAP_H
 #define STM32F1XXVXX_PINMAP_H
 

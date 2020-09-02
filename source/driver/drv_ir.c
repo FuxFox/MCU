@@ -30,8 +30,11 @@ void drv_ir_init(drv_ir_instance_t* instance)
 static void drv_ir_send_byte(drv_ir_instance_t* instance, uint8_t byte)
 {
 	uint8_t i;
-
-	for (i = 0x80; i ; i >>= 1)
+#if DRV_IR_BIT_SEQUENCE_MSB_FIRST
+	for (i = 0x80; i; i >>= 1)
+#else
+	for (i = 0x01; i ; i <<= 1)
+#endif
 	{
 		instance->pwm_driver.pwm_switch(ON);
 		hal_delay_us((byte & i)? instance->protocol.logic_1_high 
@@ -54,6 +57,11 @@ void drv_ir_send(drv_ir_instance_t* instance, uint8_t* buff, uint8_t buff_len)
 	{
 		drv_ir_send_byte(instance, *buff++);
 	}
+
+	instance->pwm_driver.pwm_switch(ON);
+	hal_delay_us(instance->protocol.logic_1_high);
+	instance->pwm_driver.pwm_switch(OFF);
+	hal_delay_us(instance->protocol.logic_1_low);		
 }
 
 #endif // DRV_IR_C

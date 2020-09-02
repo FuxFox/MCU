@@ -1,25 +1,19 @@
-/*******************************************************************************
- * Module: app_config
- *
- * History:
- *    <author>         <time>             <version>             <desc>
- *      FuxFox          2019/05/21 11:07          V1.0             build this file
- *
- *******************************************************************************/
- /*!
-  * \file     app_config.h
-  * \brief    User application configure for nrf52832
-  * \author   FuxFox
-  * \version  V1.0
-  * \date       2019/05/21
-  *******************************************************************************/
+/*!*****************************************************************************
+* @file     app_config.h
+* @brief    User application configure for nrf52832
+* @author   FuxFox
+* @version  V1.0
+* @date     2019/05/21
+*******************************************************************************/
 #ifndef APP_CONFIG_H
 #define APP_CONFIG_H
 
-  /*! \defgroup app_config app_config
-  \brief User application configure for nrf52832
-  \details
-  * @{ */
+/**
+* @defgroup app_config app_config
+* @ingroup config
+* @brief User application configure for nrf52832
+* @details
+* @{ */
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,13 +21,13 @@ extern "C" {
 
 #include "custom_board.h"
 
-/**************************** Standard *********************************/
+/*=========================== Standard header ================================*/
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-/**************************** SDK **************************************/
+/*=========================== SDK ============================================*/
 #include "nordic_common.h"
 
 #include "nrf.h"
@@ -95,10 +89,10 @@ extern "C" {
 #include "nrf_log_default_backends.h"
 
 
-/********************************* drver config ***************************************/
+/*=========================== Drver config ===================================*/
 #define CFG_LCD_SPI_INSTANCE    0        /**< SPI instance index. */
 
-/********************************* module config ***************************************/
+/*=========================== Module config ==================================*/
 
 //=================== md_battery ===========================
 #define CFG_BATTERY_CHARGING_SUPPORT               1
@@ -136,13 +130,13 @@ extern "C" {
 #define CFG_STORE_PWR_DOWN_FLAG_ADDR       0x74000         /*!< exception power down flag address */
 
 
-/********************************* ui config ***************************************/
+/*=========================== ui config ======================================*/
 
 #define CFG_BUTTON_DETECTION_DELAY          (10)                     /**< Delay from a GPIOTE event until a button is reported as pushed (in number of timer ticks). */
 #define CFG_BUTTON_LONG_PRESS_DETECT_DELAY    (3000)
 
 
-/**************************** CMSIS Configure Wizard *******************/
+/*=========================== CMSIS Configure Wizard =========================*/
 
 
 // <<< Use Configuration Wizard in Context Menu >>>\n
@@ -275,5 +269,5 @@ typedef enum
 }
 #endif
 
-/*! @}*/ //end of group MingShanGlasses_BoardConfig
+/** @}*/ //end of group MingShanGlasses_BoardConfig
 #endif // MINGSHANGLASSES_H

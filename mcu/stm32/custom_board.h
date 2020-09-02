@@ -1,24 +1,17 @@
-/*******************************************************************************
- * Module: custom_board
- *           
- * History:
- *    <author>         <time>             <version>             <desc>
- *      grx	      2019/08/01 10:30          V1.0             build this file
- *
- *******************************************************************************/
-/*!
- * \file     custom_board.h
- * \brief    Customer board pin define for STM32F103xxx
- * \author   grx
- * \version  V1.0
- * \date  	 2019/08/01
- *******************************************************************************/
+/*!*****************************************************************************
+* @file     custom_board.h
+* @brief    Customer board pin define for STM32F103xxx
+* @author   grx
+* @version  V1.0
+* @date  	 2019/08/01
+*******************************************************************************/
 #ifndef CUSTOM_BOARD_H
 #define CUSTOM_BOARD_H
 
-/*! \defgroup custom_board_public Public
-\ingroup custom_board
-\details 
+/**
+* @defgroup custom_board
+* @ingroup config
+* @details 
 * @{ */
 
 #include "stm32f1xxVxx_pinmap.h"
@@ -108,5 +101,5 @@
 #define PIN_INSIDE_GATE_CLOSE_DETECT			97
 #define PIN_INSIDE_GATE_OPEN_DETECT				98
 
-/*! @}*/ //end of group custom_board
+/** @}*/ //end of group custom_board
 #endif // CUSTOM_BOARD_H

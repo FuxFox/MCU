@@ -3,16 +3,16 @@
 *
 * History:
 *    <author>         <time>             <version>             <desc>
-*      FuxFox	      2020/06/23 15:11          V1.0             build this file
+*      FuxFox	      2020/06/23 10:41          V1.0             build this file
 *
 *******************************************************************************/
-#ifndef HAL_DELAY_H
-#define HAL_DELAY_H
+#ifndef HAL_TIMER_H
+#define HAL_TIMER_H
 
-/** 
-* @defgroup hal_delay
+/**
+* @defgroup hal_timer
 * @ingroup HAL
-* @brief Blocking-Delay HAL Template
+* @brief 
 * @details 
 * @{ */
 
@@ -21,9 +21,9 @@
 
 /*================================= Module Config ============================*/
 
-#define HAL_DELAY_SYSTEM_CLK    16000000UL
-#define HAL_DELAY_CLK_UNIT_US   (HAL_DELAY_SYSTEM_CLK / 1000000)
-#define HAL_DELAY_CLK_UNIT_MS   (HAL_DELAY_SYSTEM_CLK / 1000)
+
+
+
 
 /*================================= Data Type ================================*/
 
@@ -35,28 +35,22 @@
 
 
 /*!*****************************************************************************
-* @brief      initialize the soft delay function
-*             call this function after system clock initialization.
+* @brief  	init timebase ,now used for app_timer
+* @param[in]	uint16_t ms : currently not used.
 * @return     void
 *******************************************************************************/
-void hal_delay_init(void);
+void hal_timer_timebase_init(uint16_t ms);
 
 /*!*****************************************************************************
-* @brief      blocking delay in us
-* @param[in]    uint32_t nus
+* @brief  	reload timebase timer manually
+* @param[in]	void
 * @return     void
 *******************************************************************************/
-void hal_delay_us(uint32_t nus);
+void hal_timer_timebase_reload(void);
 
-/*!*****************************************************************************
-* @brief      blocking delay in ms
-* @param[in]    uint32_t nms
-* @return     void
-*******************************************************************************/
-void hal_delay_ms(uint32_t nms);
+#define hal_timer_timebase_pause() clr_TR0
+#define hal_timer_timebase_resume() set_TR0
 
 
-
-
-/** @} */ //end of group hal_delay
-#endif // HAL_DELAY_H
+/** @}*/ //end of group hal_timer
+#endif // HAL_TIMER_H
