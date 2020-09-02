@@ -86,6 +86,11 @@
 
 #define GET_BYTE(w, n)	((uint8_t)((w) >> (n << 3)))
 
+/** 获取结构体成员在结构体内的地址偏移量 */
+#define offsetof(TYPE, MEMBER) ((uint32_t) &((TYPE *)0)->MEMBER)
+
+/** 获取ptr指针所指结构体成员所在的结构体实例的指针 */
+#define container_of(ptr, type, member) ((type*)((char*)ptr - offsetof(type, member)))
 
 
 
