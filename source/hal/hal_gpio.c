@@ -38,7 +38,7 @@ void hal_gpio_cfg(uint8_t gpio_pin, hal_gpio_mode_enum mode, hal_gpio_pull_t pin
 	}
 }
 
-bool hal_gpio_pin_read(uint8_t port_pin)
+bool hal_gpio_pin_read(uint8_t gpio_pin)
 {
 
 }
