@@ -6,7 +6,6 @@
 - app_button  	  -	This module is used for keyboard scanning(linear or matrix or both) 
 					and provides callback.Support long-press detection.
 
-- app_error		-	Implement assert macro and error handler.
 - app_log		-	Simple LOG module
 - app_timer		-	A software timer module implemented base on hal_timer.
 - app_json		-	Simple json string decode
