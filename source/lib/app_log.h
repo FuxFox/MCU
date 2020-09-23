@@ -19,9 +19,9 @@
 #include "app_config.h"
 
 /*================================= Data Type ================================*/
-
 #define APP_LOG_ENABLE		CFG_LOG_ENABLE
 #define APP_LOG_LEVEL		CFG_LOG_LEVEL
+#define APP_LOG_ASSERT_ENABLE CFG_LOG_ASSERT_ENABLE
 
 #define APP_LOG_CHANNEL_DEF	CFG_LOG_CHANNEL_DEF
 
@@ -103,6 +103,30 @@ void app_log_print_array_to_hex(uint8_t* str, uint8_t* arry, uint8_t size);
 #endif
 
 
+#if APP_LOG_ASSERT_ENABLE
+
+/**
+* @brief  Reports the name of the source file and the source line number
+*         where the assert_param error has occurred.
+* @param  file: pointer to the source file name
+* @param  line: assert_param error line source number
+* @retval None
+*/
+void app_log_assert(uint8_t* file, uint32_t line);
+
+/**
+* @brief  The assert_param macro is used for function's parameters check.
+* @param  expr If expr is false, it calls assert_failed function
+*         which reports the name of the source file and the source
+*         line number of the call that failed.
+*         If expr is true, it returns no value.
+* @retval None
+*/
+#define assert_param(expr) ((expr) ? (void)0U : app_error_assert((uint8_t *)__FILE__, __LINE__))
+/* Exported functions ------------------------------------------------------- */
+#else
+#define assert_param(expr) ((void)0U)
+#endif /* APP_LOG_ASSERT_ENABLE */
 
 
 

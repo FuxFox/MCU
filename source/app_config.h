@@ -80,6 +80,9 @@ extern "C" {
 // <o> APP_LOG_BAUDRATE - set baud rate if use UART to print log
 #define CFG_LOG_BAUDRATE 2400
 
+// <o> APP_LOG_ASSERT_ENABLE
+#define CFG_LOG_ASSERT_ENABLE 0
+
 // </e> 
 //==========================================================
 
