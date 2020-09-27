@@ -30,4 +30,13 @@ void app_log_print_array_to_hex(uint8_t* str, uint8_t* arry, uint8_t size)
 
 #endif // APP_LOG_ENABLE
 
+#if APP_LOG_ASSERT_ENABLE
+void app_error_assert(uint8_t* file, uint32_t line)
+{
+	/* User can add his own implementation to report the file name and line number,*/
+	APP_LOG_ERROR("Wrong parameters value: file %s on line %d\r\n", file, line);
+	while (1);
+}
+#endif
+
 #endif // APP_LOG_C
