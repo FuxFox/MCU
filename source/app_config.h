@@ -64,18 +64,37 @@ extern "C" {
 
 // <o> APP_LOG_LEVEL - log display level
 // <0=> NONE 
-// <1=> INFO 
-// <2=> ERROR 
-// <3=> WARNING 
+// <1=> ERROR 
+// <2=> WARNING 
+// <3=> INFO 
 // <4=> DEBUG 
+#ifndef CFG_LOG_LEVEL
 #define CFG_LOG_LEVEL 4
+#endif
 
-// <e> APP_LOG_MODULE_SYMBLE_ENABLE
-#define CFG_LOG_MODULE_SYMBLE_ENABLE 0
+// <e> APP_LOG_TAG_ENABLE
+#ifndef CFG_LOG_TAG_ENABLE
+#define CFG_LOG_TAG_ENABLE 0
+#endif
 // </e> 
 
-// <o> APP_LOG_CHANNEL_DEF
-#define CFG_LOG_CHANNEL_DEF 0
+// <e> APP_LOG_TIMESTAMP_ENABLE
+#ifndef CFG_LOG_TIMESTAMP_ENABLE
+#define CFG_LOG_TIMESTAMP_ENABLE 0
+#endif
+// </e> 
+
+// <e> APP_LOG_COLORS_ENABLE
+#ifndef CFG_LOG_COLORS_ENABLE
+#define CFG_LOG_COLORS_ENABLE 0
+#endif
+// </e> 
+
+// <e> APP_LOG_ASSERT_ENALBLE
+#ifndef CFG_LOG_ASSERT_ENALBLE
+#define CFG_LOG_ASSERT_ENALBLE 0
+#endif
+// </e> 
 
 // <o> APP_LOG_BAUDRATE - set baud rate if use UART to print log
 #define CFG_LOG_BAUDRATE 2400

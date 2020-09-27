@@ -17,15 +17,15 @@ void app_log_init(void)
 
 }
 
-void app_log_print_array_to_hex(uint8_t* str,uint8_t *arry, uint8_t size)
+void app_log_print_array_to_hex(uint8_t* str, uint8_t* arry, uint8_t size)
 {
-		printf("%s", str);
+	printf("%s", str);
 
-		while (size--)
-		{
-				printf("0x%x,", *arry++);
-		}
-		printf("\r\n");
+	while (size--)
+	{
+		printf("0x%x,", *arry++);
+	}
+	printf("\r\n");
 }
 
 #endif // APP_LOG_ENABLE
