@@ -90,17 +90,14 @@ extern "C" {
 #endif
 // </e> 
 
-// <e> APP_LOG_ASSERT_ENALBLE
-#ifndef CFG_LOG_ASSERT_ENALBLE
-#define CFG_LOG_ASSERT_ENALBLE 0
+// <e> APP_LOG_ASSERT_ENABLE
+#ifndef CFG_LOG_ASSERT_ENABLE
+#define CFG_LOG_ASSERT_ENABLE 0
 #endif
 // </e> 
 
 // <o> APP_LOG_BAUDRATE - set baud rate if use UART to print log
 #define CFG_LOG_BAUDRATE 2400
-
-// <o> APP_LOG_ASSERT_ENABLE
-#define CFG_LOG_ASSERT_ENABLE 0
 
 // </e> 
 //==========================================================
