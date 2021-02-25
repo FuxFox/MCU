@@ -92,6 +92,8 @@
 /** 获取ptr指针所指结构体成员所在的结构体实例的指针 */
 #define container_of(ptr, type, member) ((type*)((char*)ptr - offsetof(type, member)))
 
+/* Clear unused warnings for actually unused variables */
+#define UNUSED(x) (void)(x)
 
 
 /** @}*/ //end of group app_macro
